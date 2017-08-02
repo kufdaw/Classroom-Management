@@ -2,10 +2,20 @@ body {
   padding-top: 5rem;
 }
 
-.nav {
-  padding: 30px;
-  background: lightblue;
-  color: red;
+.navbar {
+  background: rgba(0, 32, 66, 0.9);
+}
+
+.navbar .item {
+  color: #fff;
+}
+
+.navbar .item:hover {
+  color: #50daff;
+}
+
+.navbar .item:first-child:hover {
+  color: #fff;
 }
 
 .starter-template {
@@ -14,25 +24,15 @@ body {
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
   height: 60px;
   line-height: 60px;
   /* Vertically center the text there */
   background-color: #f5f5f5;
 }
 
-.box {
-  padding: 50px;
-  background: red;
-}
-
-@media (min-width: 1024px) {
-  .box {
-    padding: 5px;
-    background: blue;
-  }
+.nav-login {
+  color: #fff;
+  margin: 5px 50px 0px 0px;
 }
 
