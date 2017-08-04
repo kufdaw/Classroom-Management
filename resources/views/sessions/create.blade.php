@@ -5,7 +5,7 @@
 <div class="container">
     <div class="col-md-12">
         <h1>Do you want to meet us closer? Sign in!</h1>
-        <form method="POST" action="/login">
+        <form method="POST" action="{{ route('login') }}">
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="email">Email Address:</label>

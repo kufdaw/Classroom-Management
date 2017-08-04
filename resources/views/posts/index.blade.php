@@ -2,6 +2,12 @@
 
 @section ('content')
 
+@if ($flash = session('message'))
+<div class="alert alert-info text-center" role="alert">
+    {{ $flash }}
+</div>
+@endif
+
 <div class="container">
 
   <div class="starter-template">
@@ -37,7 +43,7 @@ Praesent vel erat ullamcorper, porttitor eros ut, sodales odio. Vestibulum eleif
 
 Morbi cursus vitae ante at euismod. Suspendisse blandit turpis nec molestie consequat. Sed id massa sed augue porttitor ultricies et eget nulla. Etiam pellentesque lacinia quam, nec vulputate diam. Nam lobortis hendrerit tortor, at vehicula nisl ultricies sit amet. Phasellus dignissim varius risus sit amet finibus. Duis eu magna at orci placerat semper. Vivamus vitae dui leo.
 
-Vivamus ac arcu lacus. Sed accumsan, sem in aliquet feugiat, nibh erat maximus turpis, a finibus nunc ex at nunc. Praesent sed nunc blandit, egestas velit quis, vulputate nulla. Cras vitae neque sit amet arcu ultrices feugiat. Proin sit amet dui vel quam pretium tempus ac et ipsum. Sed accumsan rutrum dolor, sed dapibus quam venenatis pretium. Ut id urna semper, euismod erat non, pellentesque elit. Vestibulum ac egestas metus, vel interdum odio. Quisque lobortis eu metus id consequat. Sed aliquam in libero sed condimentum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras facilisis arcu nisi, et condimentum eros imperdiet ut. Donec nec imperdiet libero. 
+Vivamus ac arcu lacus. Sed accumsan, sem in aliquet feugiat, nibh erat maximus turpis, a finibus nunc ex at nunc. Praesent sed nunc blandit, egestas velit quis, vulputate nulla. Cras vitae neque sit amet arcu ultrices feugiat. Proin sit amet dui vel quam pretium tempus ac et ipsum. Sed accumsan rutrum dolor, sed dapibus quam venenatis pretium. Ut id urna semper, euismod erat non, pellentesque elit. Vestibulum ac egestas metus, vel interdum odio. Quisque lobortis eu metus id consequat. Sed aliquam in libero sed condimentum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras facilisis arcu nisi, et condimentum eros imperdiet ut. Donec nec imperdiet libero.
 
     </p>
   </div>

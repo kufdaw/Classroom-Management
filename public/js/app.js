@@ -800,7 +800,40 @@ window.Vue = __webpack_require__(35);
 Vue.component('example', __webpack_require__(36));
 
 var app = new Vue({
-  el: '#app'
+    el: '#app'
+});
+
+$('.delete-subject').click(function () {
+    var _this = this;
+    var token = $(this).data('token');
+    $.ajax({
+        type: "DELETE",
+        url: $(this).data('address'),
+        data: { _token: token },
+        success: function success(data) {
+            console.log(data);
+            $(_this).closest('.row').remove();
+        },
+        error: function error(data) {
+            console.log('Error:', data);
+        }
+    });
+});
+$('.delete-division').click(function () {
+    var _this = this;
+    var token = $(this).data('token');
+    $.ajax({
+        type: "DELETE",
+        url: $(this).data('address'),
+        data: { _token: token },
+        success: function success(data) {
+            console.log(data);
+            $(_this).closest('.row').remove();
+        },
+        error: function error(data) {
+            console.log('Error:', data);
+        }
+    });
 });
 
 /***/ }),

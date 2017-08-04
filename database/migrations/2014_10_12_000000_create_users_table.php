@@ -18,8 +18,11 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('role_id');
             $table->unsignedInteger('division_id')->nullable();
             $table->string('name');
+            $table->string('surname');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('registration_token');
+            $table->date('birth_date');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ class TableForeignSubjectsDivision extends Migration
     public function up()
     {
         Schema::table('subjects_division', function (Blueprint $table) {
-            $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->foreign('division_id')->references('id')->on('divisions');
         });
     }

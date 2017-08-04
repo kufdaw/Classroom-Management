@@ -5,7 +5,7 @@
 <div class="container">
     <div class="col-md-12">
         <h1>Sometimes it's good to keep account safe. Remember to change password regurarly!</h1>
-        <form method="POST" action="/editprofile">
+        <form method="POST" action="/profile">
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="password_current">We can't let you just change password because of safety cases.<br> We need to be sure this is your account, so write your current password:  </label>
@@ -25,6 +25,11 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Change password!</button>
             </div>
+            @if ($flash = session('message'))
+            <div class="alert alert-success text-center" role="alert">
+                {{ $flash }}
+            </div>
+            @endif
             @include ('layouts.errors')
         </form>
 

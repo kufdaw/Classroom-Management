@@ -9,14 +9,23 @@
                         &nbsp&nbsp|
                     </strong>
                 </a>
-                <a class="navbar-brand item" href="/logout">
+                <a class="navbar-brand item" href="{{ route('logout') }}">
                     Log out
                 </a>
-                <a class="navbar-brand item" href="/editprofile">
+                <a class="navbar-brand item" href="{{ route('profile') }}">
                     Edit Profile
                 </a>
+                <a class="navbar-brand item" href="{{ route('profile.create') }}">
+                    Add User
+                </a>
+                <a class="navbar-brand item" href="{{ route('subject.create') }}">
+                    Add subject
+                </a>
+                <a class="navbar-brand item" href="{{ route('division.create') }}">
+                    Add division
+                </a>
             @else
-                <a class="navbar-brand item" href="/login">
+                <a class="navbar-brand item" href"{{ route('login') }}">
                     Sign in
                 </a>
             @endif

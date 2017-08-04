@@ -20,3 +20,36 @@ Vue.component('example', require('./components/Example.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+$('.delete-subject').click(function(){
+    var _this = this;
+    var token = $(this).data('token');
+     $.ajax({
+         type: "DELETE",
+         url: $(this).data('address'),
+         data: {_token :token},
+         success: function (data) {
+             console.log(data);
+             $(_this).closest('.row').remove();
+         },
+         error: function (data) {
+             console.log('Error:', data);
+         }
+     });
+ });
+$('.delete-division').click(function(){
+    var _this = this;
+    var token = $(this).data('token');
+     $.ajax({
+         type: "DELETE",
+         url: $(this).data('address'),
+         data: {_token :token},
+         success: function (data) {
+             console.log(data);
+             $(_this).closest('.row').remove();
+         },
+         error: function (data) {
+             console.log('Error:', data);
+         }
+     });
+ });

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubjectsDivisionTable extends Migration
+class CreateDivisionSubjectTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSubjectsDivisionTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects_division', function (Blueprint $table) {
+        Schema::create('division_subject'), function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('subject_id');
             $table->unsignedInteger('division_id');
@@ -28,6 +28,6 @@ class CreateSubjectsDivisionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects_division');
+        Schema::dropIfExists('division_subject');
     }
 }
