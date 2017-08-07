@@ -27,13 +27,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+
     public function role()
     {
         return $this->belongsTo('App\Role');
     }
 
+
+
     public function division()
     {
-        return $this->hasOne('App\Division');
+        return $this->belongsTo('App\Division');
     }
 }

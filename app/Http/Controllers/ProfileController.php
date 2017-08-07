@@ -78,7 +78,7 @@ class ProfileController extends Controller
         $user = User::where('registration_token', $token)->first();
         $user->update([
             'password' => bcrypt(request('password')),
-            'registration_token' => 'NULL'
+            'registration_token' => null
         ]);
 
         session()->flash('message', 'Your password has been successfully changed!');

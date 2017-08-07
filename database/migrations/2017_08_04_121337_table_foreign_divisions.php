@@ -14,7 +14,7 @@ class TableForeignDivisions extends Migration
     public function up()
     {
         Schema::table('divisions', function (Blueprint $table) {
-            $table->foreign('tutor_id')->references('id')->on('user');
+            $table->foreign('tutor_id')->references('id')->on('users');
         });
     }
 

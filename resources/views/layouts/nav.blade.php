@@ -25,7 +25,7 @@
                     Add division
                 </a>
             @else
-                <a class="navbar-brand item" href"{{ route('login') }}">
+                <a class="navbar-brand item" href="{{ route('login') }}">
                     Sign in
                 </a>
             @endif

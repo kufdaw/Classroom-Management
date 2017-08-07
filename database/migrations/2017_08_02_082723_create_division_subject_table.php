@@ -13,7 +13,7 @@ class CreateDivisionSubjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('division_subject'), function (Blueprint $table) {
+        Schema::create('division_subject', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('subject_id');
             $table->unsignedInteger('division_id');

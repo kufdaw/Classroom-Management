@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TableForeignSubjectsDivision extends Migration
+class TableForeignDivisionSubject extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class TableForeignSubjectsDivision extends Migration
      */
     public function up()
     {
-        Schema::table('subjects_division', function (Blueprint $table) {
+        Schema::table('division_subject', function (Blueprint $table) {
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->foreign('division_id')->references('id')->on('divisions');
         });
@@ -26,7 +26,7 @@ class TableForeignSubjectsDivision extends Migration
      */
     public function down()
     {
-        Schema::table('subjects_division', function (Blueprint $table) {
+        Schema::table('division_subject', function (Blueprint $table) {
             $table->dropForeign(['subject_id']);
             $table->dropForeign(['division_id']);
         });
