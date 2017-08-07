@@ -17,6 +17,11 @@ class SubjectsSeeder extends Seeder
                 array('name' => 'biology'),
                 array('name' => 'chemistry'),
                 array('name' => 'maths'),
+                array('name' => 'music'),
+                array('name' => 'german'),
+                array('name' => 'self-defence'),
+                array('name' => 'it'),
+                array('name' => 'sport'),
                 array('name' => 'english')
             )
         );

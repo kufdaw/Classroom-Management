@@ -836,6 +836,16 @@ $('.delete-division').click(function () {
     });
 });
 
+$('.btn').on('click', function () {
+    if ($(this).hasClass('active')) {
+        $(this).find('input').removeAttr('checked');
+        $(this).removeClass('active');
+    } else {
+        $(this).find('input').attr('checked', 'checked');
+        $(this).addClass('active');
+    }
+});
+
 /***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {

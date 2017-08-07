@@ -44,3 +44,12 @@ body {
   color: #51aa44;
 }
 
+.btn-subject {
+  margin-right: 15px;
+}
+
+label .focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+

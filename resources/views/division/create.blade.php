@@ -28,9 +28,9 @@
                             <tr>
                                 <th class="col-md-2">{{ $division->name }}</th>
                                 <th class="col-md-8 text-center table-tutor">{{ $division->tutor->name . ' ' . $division->tutor->surname }}</th>
-                                <!-- <button type="button" class="btn btn-danger btn-sm delete-division" data-token="{{ csrf_token() }}" data-address="{{ route('division.delete', $division->id) }}">Delete</button> -->
                                 <th class="col-md-2">
-                                    <button role="button" class="btn btn-info btn-sm edit-division" data-token="{{ csrf_token() }}" data-address="{{ route('division.delete', $division->id) }}">Edit</button>
+                                  <a class="btn btn-info btn-sm edit-division" href="{{ route('division.edit', $division->id) }}">Edit</a>
+                                    <!-- <button role="button" class="btn btn-info btn-sm edit-division">Edit</button> -->
                                 </th>
                             </tr>
                             @endforeach

@@ -21,4 +21,5 @@ Route::delete('/subject/delete/{id}', 'SubjectController@delete')->name('subject
 Route::get('/division/create', 'DivisionController@create')->name('division.create');
 Route::post('/division/create', 'DivisionController@store');
 Route::delete('/division/delete/{id}', 'DivisionController@delete')->name('division.delete');
-Route::get('');
+Route::get('/division/edit/{id}', 'DivisionController@edit')->name('division.edit');
+Route::post('/division/edit/{id}', 'DivisionController@update')->name('division.update');

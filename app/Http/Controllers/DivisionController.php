@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Division;
 use App\User;
+use App\Subject;
 
 class DivisionController extends Controller
 {
@@ -22,7 +23,7 @@ class DivisionController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'division' => 'required|alpha_num|min:2',
+            'division' => 'required|alpha_num|min:2|unique:divisions,name',
             'tutor' => 'required'
         ]);
 
@@ -35,6 +36,34 @@ class DivisionController extends Controller
         session()->flash('message', $division->name);
 
         return redirect()->route('division.create');
+    }
+
+    public function edit($id)
+    {
+        $division = Division::where('id', $id)->first();
+        $subjects = Subject::get();
+
+        $subjectList = [];
+
+        foreach ($division->subject as $currentSubject) {
+            if ($subjects->contains('id', $currentSubject->id)) {
+                $subjectList[] = $currentSubject->id;
+            }
+        }
+
+        return view('division.edit', [
+          'division' => $division,
+          'subjects' => $subjects,
+          'subjectList' => $subjectList
+      ]);
+    }
+
+    public function update($id)
+    {
+        $division = Division::find(['id' => $id])->first();
+        $division->subject()->sync(request('subjectsId'));
+        $division->saveOrFail();
+        return redirect()->route('division.edit', $id);
     }
 
     public function delete($id)
