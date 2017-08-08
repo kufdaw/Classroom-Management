@@ -11,12 +11,18 @@
                         <h1>Division: <strong>{{ $division->name }}</strong></h1>
                     </div>
                     <hr>
-                    <div class="col-md-12 text-center" data-toggle="buttons">
+                    <div class="col-md-12 text-center">
                         <h2>Assign subjects:</h2>
                         @foreach ($subjects as $subject)
-                        <label class="btn btn-outline-info btn-subject {{ in_array($subject->id, $subjectList) ? 'active' : '' }}">
-                            <input type="checkbox" name="subjectsId[]" autocomplete="off" {{ in_array($subject->id, $subjectList) ? 'checked' : '' }} value="{{ $subject->id }}">
-                            {{ $subject->name }}
+                        <label class="btn btn-outline-info btn-subject {{ in_array($subject->id, $divisionSubjects) ? 'active' : 'disabled' }}">
+                            {{ '[' . $subject->id . '] ' . $subject->name }}
+                            @if(in_array($subject->id, $divisionSubjects))
+                                {{$subject->id}}
+                                (teachers:
+
+                                {{ $subject->teacher->first()->id }}
+                                )
+                            @endif
                         </label>
                         @endforeach
                     </div>

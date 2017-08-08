@@ -27,10 +27,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
-
     public function role()
     {
         return $this->belongsTo('App\Role');
+    }
+
+    public function subject()
+    {
+        return $this->belongsToMany('App\Subject', 'division_subject')->withPivot('division_id');
+    }
+
+    public function division()
+    {
+        return $this->belongsToMany('App\Division', 'division_subject')->withPivot('subject_id');
     }
 }

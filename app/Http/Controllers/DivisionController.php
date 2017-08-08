@@ -43,18 +43,17 @@ class DivisionController extends Controller
         $division = Division::where('id', $id)->first();
         $subjects = Subject::get();
 
-        $subjectList = [];
+        $divisionSubjects = [];
 
         foreach ($division->subject as $currentSubject) {
-            if ($subjects->contains('id', $currentSubject->id)) {
-                $subjectList[] = $currentSubject->id;
-            }
+            $divisionSubjects[] = $currentSubject->id;
         }
+
 
         return view('division.edit', [
           'division' => $division,
           'subjects' => $subjects,
-          'subjectList' => $subjectList
+          'divisionSubjects' => $divisionSubjects
       ]);
     }
 
