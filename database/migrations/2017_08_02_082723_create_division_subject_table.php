@@ -17,6 +17,7 @@ class CreateDivisionSubjectTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('subject_id');
             $table->unsignedInteger('division_id');
+            $table->unsignedInteger('teacher_id');
             $table->timestamps();
         });
     }

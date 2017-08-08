@@ -26,6 +26,11 @@
                         <input type="text" class="form-control" id="division" name="division">
                     </div> -->
                     <hr>
+                    @if ($flash = session('message'))
+                    <div class="alert alert-success text-center" role="alert">
+                        <strong>{{ $flash }}</strong> division has been updated.
+                    </div>
+                    @endif
                     <div class="col-md-12 text-center form-group">
                         <br>
                         <button type="submit" class="btn btn-warning">Update!</button>
@@ -33,6 +38,8 @@
 
                     <a class="btn btn-info" href="{{ route('division.create') }}">Cancel</a>
                     <button type="button" class="btn btn-danger btn-sm delete-division" data-token="{{ csrf_token() }}" data-address="{{ route('division.delete', $division->id) }}">Delete</button>
+
+                    @include ('layouts.errors')
                 </form>
             </div>
         </div>

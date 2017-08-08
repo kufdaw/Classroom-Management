@@ -33,11 +33,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Role');
     }
-
-
-
-    public function division()
-    {
-        return $this->belongsTo('App\Division');
-    }
 }

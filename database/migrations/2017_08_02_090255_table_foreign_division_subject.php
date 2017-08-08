@@ -16,6 +16,7 @@ class TableForeignDivisionSubject extends Migration
         Schema::table('division_subject', function (Blueprint $table) {
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->foreign('division_id')->references('id')->on('divisions');
+            $table->foreign('teacher_id')->references('id')->on('users');
         });
     }
 
@@ -29,6 +30,7 @@ class TableForeignDivisionSubject extends Migration
         Schema::table('division_subject', function (Blueprint $table) {
             $table->dropForeign(['subject_id']);
             $table->dropForeign(['division_id']);
+            $table->dropForeign(['teacher_id']);
         });
     }
 }

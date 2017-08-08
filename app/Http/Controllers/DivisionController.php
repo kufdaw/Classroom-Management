@@ -63,6 +63,9 @@ class DivisionController extends Controller
         $division = Division::find(['id' => $id])->first();
         $division->subject()->sync(request('subjectsId'));
         $division->saveOrFail();
+
+        session()->flash('message', $division->name);
+
         return redirect()->route('division.edit', $id);
     }
 
