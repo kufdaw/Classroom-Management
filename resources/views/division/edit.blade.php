@@ -19,8 +19,7 @@
                             @if(in_array($subject->id, $divisionSubjects))
                                 {{$subject->id}}
                                 (teachers:
-
-                                {{ $subject->teacher->first()->id }}
+                                {{ $subject->teacher }}
                                 )
                             @endif
                         </label>
