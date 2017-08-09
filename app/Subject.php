@@ -10,13 +10,18 @@ class Subject extends Model
             'name'
         ];
 
-    public function division()
+    public function divisions()
     {
         return $this->belongsToMany('App\Division', 'division_subject')->withPivot('teacher_id');
     }
 
-    public function teacher()
+    public function teachers()
     {
-        return $this->belongsToMany('App\User', 'division_subject', 'id', 'teacher_id')->withPivot('subject_id');
+        return $this->belongsToMany('App\User', 'division_subject', 'id', 'teacher_id')->withPivot('division_id');
+    }
+
+    public function getTeacherByDivisionId($id)
+    {
+        return $this->teachers()->where('division_subject.division_id', $id)->get();
     }
 }

@@ -45,7 +45,7 @@ class DivisionController extends Controller
 
         $divisionSubjects = [];
 
-        foreach ($division->subject as $currentSubject) {
+        foreach ($division->subjects as $currentSubject) {
             $divisionSubjects[] = $currentSubject->id;
         }
 
@@ -60,7 +60,7 @@ class DivisionController extends Controller
     public function update($id)
     {
         $division = Division::find(['id' => $id])->first();
-        $division->subject()->sync(request('subjectsId'));
+        $division->subjects()->sync(request('subjectsId'));
         $division->saveOrFail();
 
         session()->flash('message', $division->name);

@@ -10,17 +10,17 @@ class Division extends Model
             'name', 'tutor_id'
         ];
 
-    public function subject()
+    public function subjects()
     {
         return $this->belongsToMany('App\Subject', 'division_subject')->withPivot('teacher_id');
     }
 
-    public function teacher()
+    public function teachers()
     {
         return $this->belongsToMany('App\User', 'division_subject', 'id', 'teacher_id')->withPivot('subject_id');
     }
 
-    public function tutor()
+    public function tutors()
     {
         return $this->hasOne('App\User', 'id', 'tutor_id');
     }
