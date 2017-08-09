@@ -19,18 +19,19 @@
                         <thead>
                             <tr>
                                 <th class="col-md-2">Division</th>
-                                <th class="col-md-8 text-center">Tutor</th>
-                                <th class="col-md-2">Actions</th>
+                                <th class="col-md-6 text-center">Tutor</th>
+                                <th class="col-md-4">Assign</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($divisions as $division)
                             <tr>
                                 <th class="col-md-2">{{ $division->name }}</th>
-                                <th class="col-md-8 text-center table-tutor">{{ $division->tutor->name . ' ' . $division->tutor->surname }}</th>
+                                <th class="col-md-8 text-center table-tutor">{{ $division->tutors->name . ' ' . $division->tutors->surname }}</th>
                                 <th class="col-md-2">
-                                  <a class="btn btn-info btn-sm edit-division" href="{{ route('division.edit', $division->id) }}">Edit</a>
+                                  <a class="btn btn-info btn-sm edit-division" href="{{ route('division.subject.edit', $division->id) }}">Subjects</a>
                                     <!-- <button role="button" class="btn btn-info btn-sm edit-division">Edit</button> -->
+                                  <a class="btn btn-primary btn-sm edit-division" href="{{ route('division.subject.edit', $division->id) }}">Students</a>
                                 </th>
                             </tr>
                             @endforeach

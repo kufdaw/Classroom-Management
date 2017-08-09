@@ -48,8 +48,20 @@ body {
   margin-right: 15px;
 }
 
+.btn-subject input {
+  display: none;
+}
+
 label .focus {
   -webkit-box-shadow: none !important;
           box-shadow: none !important;
+}
+
+.taken {
+  background: rgba(219, 107, 107, 0.23);
+}
+
+.subject-selected {
+  background: rgba(117, 200, 226, 0.15);
 }
 

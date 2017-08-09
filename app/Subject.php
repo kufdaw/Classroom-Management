@@ -12,12 +12,12 @@ class Subject extends Model
 
     public function divisions()
     {
-        return $this->belongsToMany('App\Division', 'division_subject')->withPivot('teacher_id');
+        return $this->belongsToMany('App\Division', 'division_subject')->withPivot('user_id');
     }
 
     public function teachers()
     {
-        return $this->belongsToMany('App\User', 'division_subject', 'id', 'teacher_id')->withPivot('division_id');
+        return $this->belongsToMany('App\User', 'division_subject')->withPivot('division_id');
     }
 
     public function getTeacherByDivisionId($id)

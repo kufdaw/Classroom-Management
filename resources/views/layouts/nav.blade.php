@@ -22,7 +22,7 @@
                     Add subject
                 </a>
                 <a class="navbar-brand item" href="{{ route('division.create') }}">
-                    Add division
+                    Divisions
                 </a>
             @else
                 <a class="navbar-brand item" href="{{ route('login') }}">

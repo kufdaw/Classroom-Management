@@ -52,4 +52,9 @@ $('.delete-division').click(function(){
              console.log('Error:', data);
          }
      });
+
+     $('.btn-subject').click(function() {
+
+         alert($(this).find('input').prop('checked'));
+     });
  });

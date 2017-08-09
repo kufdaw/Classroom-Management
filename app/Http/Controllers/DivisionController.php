@@ -42,30 +42,47 @@ class DivisionController extends Controller
     {
         $division = Division::where('id', $id)->first();
         $subjects = Subject::get();
-
-        $divisionSubjects = [];
-
-        foreach ($division->subjects as $currentSubject) {
-            $divisionSubjects[] = $currentSubject->id;
-        }
+        $teachers = User::where('role_id', '2')->get();
 
 
-        return view('division.edit', [
+        return view('division.subject.edit', [
           'division' => $division,
           'subjects' => $subjects,
-          'divisionSubjects' => $divisionSubjects
+          'teachers' => $teachers
       ]);
     }
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
-        $division = Division::find(['id' => $id])->first();
-        $division->subjects()->sync(request('subjectsId'));
+        // dump($request->subject_id);
+        // dd($request->teacher_id);
+        $this->validate(request(), [
+            'subject_id' => 'required',
+            'teacher_id' => 'required'
+        ]);
+
+        $subjectTeacher = [];
+
+        for ($i = 0; $i < count(request('subject_id')); $i++) {
+            if (request('teacher_id')[$i] != 0) {
+                $subjectTeacher[] = [
+                    'subject_id' => request('subject_id')[$i],
+                    'user_id' => request('teacher_id')[$i]
+                ];
+            }
+        }
+
+        $division = Division::find($id);
+
+        $division->subjects()->sync($subjectTeacher);
+
+
+
         $division->saveOrFail();
 
         session()->flash('message', $division->name);
 
-        return redirect()->route('division.edit', $id);
+        return redirect()->route('division.subject.edit', $id);
     }
 
     public function delete($id)
