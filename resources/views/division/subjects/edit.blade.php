@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="form-group col-md-12">
-                <form method="POST" action="{{ route('division.update', $division->id) }}">
+                <form method="POST" action="{{ route('division.subjects.update', $division->id) }}">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <div class="col-md-12 text-center">
@@ -43,7 +43,7 @@
                                             <select class="custom-select" name="teacher_id[]">
                                                 <option value="0" selected> </option>
                                                 @foreach ($teachers as $teacher)
-                                                    <option value="{{ $teacher->id ? $teacher->id : 0 }}" {{ ($subject->getTeacherByDivisionId($division->id)->first()['id'] == $teacher->id) ? 'selected' : '' }}>
+                                                    <option value="{{ $teacher->id }}" {{ ($subject->getTeacherByDivisionId($division->id)->first()['id'] == $teacher->id) ? 'selected' : '' }}>
                                                         {{ $teacher->name . ' ' . $teacher->surname }}
                                                     </option>
                                                 @endforeach
@@ -59,19 +59,13 @@
                     </div>
                 </div>
 
-                    <!-- <div class="form-group">
-                        <label for="division">Division name:</label>
-                        <input type="text" class="form-control" id="division" name="division">
-                    </div> -->
-
                     <div class="col-md-12 text-center form-group">
                         <br>
                         <button type="submit" class="btn btn-warning">Update!</button>
                     </div>
-
-                    <a class="btn btn-info" href="{{ route('division.create') }}">Cancel</a>
-                    <button type="button" class="btn btn-danger btn-sm delete-division" data-token="{{ csrf_token() }}" data-address="{{ route('division.delete', $division->id) }}">Delete</button>
-
+                    <hr>
+                    <a class="btn btn-info" href="{{ route('division.create') }}">Back</a>
+                    <hr>
                     @include ('layouts.errors')
                 </form>
             </div>

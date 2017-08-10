@@ -29,6 +29,6 @@
                     Sign in
                 </a>
             @endif
-        <a class="navbar-brand item" href="../">Home</a>
+        <a class="navbar-brand item" href="{{ route('home') }}">Home</a>
     </div>
 </nav>

@@ -26,12 +26,14 @@
                         <tbody>
                             @foreach ($divisions as $division)
                             <tr>
-                                <th class="col-md-2">{{ $division->name }}</th>
+                                <th class="col-md-2">{{ $division->name }}
+                                    <button type="button" class="btn btn-danger btn-sm delete-division" data-division="{{ $division->name }}" data-token="{{ csrf_token() }}" data-address="{{ route('division.delete', $division->id) }}">Delete</button>                                            
+                                </th>
                                 <th class="col-md-8 text-center table-tutor">{{ $division->tutors->name . ' ' . $division->tutors->surname }}</th>
                                 <th class="col-md-2">
-                                  <a class="btn btn-info btn-sm edit-division" href="{{ route('division.subject.edit', $division->id) }}">Subjects</a>
+                                  <a class="btn btn-info btn-sm edit-division" href="{{ route('division.subjects.edit', $division->id) }}">Subjects</a>
                                     <!-- <button role="button" class="btn btn-info btn-sm edit-division">Edit</button> -->
-                                  <a class="btn btn-primary btn-sm edit-division" href="{{ route('division.subject.edit', $division->id) }}">Students</a>
+                                  <a class="btn btn-primary btn-sm edit-division" href="{{ route('division.students.edit', $division->id) }}">Students</a>
                                 </th>
                             </tr>
                             @endforeach

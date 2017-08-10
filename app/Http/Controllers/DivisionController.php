@@ -38,24 +38,22 @@ class DivisionController extends Controller
         return redirect()->route('division.create');
     }
 
-    public function edit($id)
+    public function subjectsEdit($id)
     {
         $division = Division::where('id', $id)->first();
         $subjects = Subject::get();
         $teachers = User::where('role_id', '2')->get();
 
 
-        return view('division.subject.edit', [
+        return view('division.subjects.edit', [
           'division' => $division,
           'subjects' => $subjects,
           'teachers' => $teachers
       ]);
     }
 
-    public function update($id)
+    public function subjectsUpdate($id)
     {
-        // dump($request->subject_id);
-        // dd($request->teacher_id);
         $this->validate(request(), [
             'subject_id' => 'required',
             'teacher_id' => 'required'
@@ -66,23 +64,46 @@ class DivisionController extends Controller
 
         for ($i = 0; $i < count(request('subject_id')); $i++) {
             if (request('teacher_id')[$i] != 0) {
-                $subjectTeacher[] = [
-                        //request('subject_id')[$i] => [ 'user_id' => request('teacher_id')[$i] ],
-                        'subject_id' => request('subject_id')[$i],
-                        'user_id' => request('teacher_id')[$i]
-                    ];
+                $subjectTeacher[request('subject_id')[$i]] = [
+                    'user_id' => request('teacher_id')[$i]
+                ];
             }
         }
 
-        dump($subjectTeacher);
+        $division = Division::find($id);
+        $division->subjects()->sync($subjectTeacher);
+        session()->flash('message', $division->name);
+
+        return redirect()->route('division.subjects.edit', $id);
+    }
+
+    public function studentsEdit($id)
+    {
+        $division = Division::where('id', $id)->first();
+        $students = User::where('role_id', '3')->get();
+
+
+        return view('division.students.edit', [
+          'division' => $division,
+          'students' => $students
+      ]);
+    }
+
+    public function studentsUpdate($id)
+    {
+        User::where('division_id', $id)->update(['division_id' => null]);
+
+        if (request('user_id')) {
+            foreach (request('user_id') as $userId) {
+                User::where('id', $userId)->update(['division_id' => $id]);
+            }
+        }
 
         $division = Division::find($id);
 
-        $division->subjects()->sync($subjectTeacher);
-
         session()->flash('message', $division->name);
 
-        return redirect()->route('division.subject.edit', $id);
+        return redirect()->route('division.students.edit', $id);
     }
 
     public function delete($id)

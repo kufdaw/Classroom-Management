@@ -65,3 +65,7 @@ label .focus {
   background: rgba(117, 200, 226, 0.15);
 }
 
+.assign-students {
+  width: 100%;
+}
+

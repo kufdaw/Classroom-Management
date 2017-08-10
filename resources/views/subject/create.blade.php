@@ -14,7 +14,7 @@
                             {{ $subject->name }}
                         </div>
                         <div class="col-md-8">
-                            <button type="button" class="btn btn-danger btn-sm delete-subject" data-token="{{ csrf_token() }}" data-address="{{ route('subject.delete', $subject->id) }}">Delete</button>
+                            <button type="button" class="btn btn-danger btn-sm delete-subject" data-subject="{{ $subject->name }}" data-token="{{ csrf_token() }}" data-address="{{ route('subject.delete', $subject->id) }}">Delete</button>
                         </div>
                     </div>
                     @endforeach
