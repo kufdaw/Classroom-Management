@@ -52,7 +52,7 @@ class DivisionController extends Controller
       ]);
     }
 
-    public function update(Request $request, $id)
+    public function update($id)
     {
         // dump($request->subject_id);
         // dd($request->teacher_id);
@@ -63,22 +63,22 @@ class DivisionController extends Controller
 
         $subjectTeacher = [];
 
+
         for ($i = 0; $i < count(request('subject_id')); $i++) {
             if (request('teacher_id')[$i] != 0) {
                 $subjectTeacher[] = [
-                    'subject_id' => request('subject_id')[$i],
-                    'user_id' => request('teacher_id')[$i]
-                ];
+                        //request('subject_id')[$i] => [ 'user_id' => request('teacher_id')[$i] ],
+                        'subject_id' => request('subject_id')[$i],
+                        'user_id' => request('teacher_id')[$i]
+                    ];
             }
         }
+
+        dump($subjectTeacher);
 
         $division = Division::find($id);
 
         $division->subjects()->sync($subjectTeacher);
-
-
-
-        $division->saveOrFail();
 
         session()->flash('message', $division->name);
 
