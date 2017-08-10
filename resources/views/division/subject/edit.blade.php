@@ -30,34 +30,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     @foreach ($subjects as $subject)
-
-                                    <tr class="{{ $division->subjects->contains('id', $subject->id) ? 'subject-selected' : '' }}">
-                                        <th class="col-md-6" >
-                                            <input type="hidden" name="subject_id[]" value="{{ $subject->id }}">
+                                        <tr class="{{ $division->subjects->contains('id', $subject->id) ? 'subject-selected' : '' }}">
+                                            <th class="col-md-6" >
                                                 {{ $subject->name }}
-                                            </strong>
-                                        </th>
-                                        <th class="col-md-6">
-                                            <select class="custom-select" name="teacher_id[]">
-                                                <option value="0" selected> </option>
-                                                @foreach ($teachers as $teacher)
-                                                    <option value="{{ $teacher->id ? $teacher->id : 0 }}" {{ ($subject->getTeacherByDivisionId($division->id)->first()['id'] == $teacher->id) ? 'selected' : '' }}>
-                                                        {{ $teacher->name . ' ' . $teacher->surname }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </th>
-                                    </tr>
-
+                                            </th>
+                                            <th class="col-md-6">
+                                                <select class="custom-select" name="subjects[{{$subject->id}}]">
+                                                    <option value="0" selected></option>
+                                                    @foreach ($teachers as $teacher)
+                                                        <option value="{{ $teacher->id ? $teacher->id : 0 }}" {{ ($subject->getTeacherByDivisionId($division->id)->first()['id'] == $teacher->id) ? 'selected' : '' }}>
+                                                            {{ $teacher->name . ' ' . $teacher->surname }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </th>
+                                        </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                </div>
+
 
                     <!-- <div class="form-group">
                         <label for="division">Division name:</label>

@@ -52,37 +52,28 @@ class DivisionController extends Controller
       ]);
     }
 
-    public function update($id)
+    public function update(Request $request, Division $division)
     {
-        // dump($request->subject_id);
-        // dd($request->teacher_id);
+        /*
         $this->validate(request(), [
             'subject_id' => 'required',
             'teacher_id' => 'required'
         ]);
+        */
 
-        $subjectTeacher = [];
+        $params = $request->all();
+        $relations = array_filter($params['subjects'], function($value){
+            return $value;
+        });
+        $relations = array_map(function($value){
+            return ['user_id' => $value];
+        }, $relations);
 
-
-        for ($i = 0; $i < count(request('subject_id')); $i++) {
-            if (request('teacher_id')[$i] != 0) {
-                $subjectTeacher[] = [
-                        //request('subject_id')[$i] => [ 'user_id' => request('teacher_id')[$i] ],
-                        'subject_id' => request('subject_id')[$i],
-                        'user_id' => request('teacher_id')[$i]
-                    ];
-            }
-        }
-
-        dump($subjectTeacher);
-
-        $division = Division::find($id);
-
-        $division->subjects()->sync($subjectTeacher);
+        $division->subjects()->sync($relations);
 
         session()->flash('message', $division->name);
 
-        return redirect()->route('division.subject.edit', $id);
+        return redirect()->route('division.subject.edit', $division->id);
     }
 
     public function delete($id)

@@ -22,4 +22,4 @@ Route::get('/division/create', 'DivisionController@create')->name('division.crea
 Route::post('/division/create', 'DivisionController@store');
 Route::delete('/division/delete/{id}', 'DivisionController@delete')->name('division.delete');
 Route::get('/division/subject/edit/{id}', 'DivisionController@edit')->name('division.subject.edit');
-Route::put('/division/subject/edit/{id}', 'DivisionController@update')->name('division.update');
+Route::put('/division/subject/edit/{division}', 'DivisionController@update')->name('division.update');
