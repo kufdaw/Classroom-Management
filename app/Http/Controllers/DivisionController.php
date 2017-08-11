@@ -20,16 +20,16 @@ class DivisionController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $this->validate(request(), [
+        $this->validate($request, [
             'division' => 'required|alpha_num|min:2|unique:divisions,name',
             'tutor' => 'required'
         ]);
 
         $division = Division::create([
-            'name' => request('division'),
-            'tutor_id' => request('tutor')
+            'name' => $request->input('division'),
+            'tutor_id' => $request->input('tutor')
         ]);
 
 
@@ -38,7 +38,7 @@ class DivisionController extends Controller
         return redirect()->route('division.create');
     }
 
-    public function subjectsEdit($id)
+    public function subjectsEdit(Request $request, $id)
     {
         $division = Division::where('id', $id)->first();
         $subjects = Subject::get();
@@ -52,20 +52,19 @@ class DivisionController extends Controller
       ]);
     }
 
-    public function subjectsUpdate($id)
+    public function subjectsUpdate(Request $request, $id)
     {
-        $this->validate(request(), [
+        $this->validate($request, [
             'subject_id' => 'required',
             'teacher_id' => 'required'
         ]);
 
         $subjectTeacher = [];
 
-
-        for ($i = 0; $i < count(request('subject_id')); $i++) {
-            if (request('teacher_id')[$i] != 0) {
-                $subjectTeacher[request('subject_id')[$i]] = [
-                    'user_id' => request('teacher_id')[$i]
+        for ($i = 0; $i < count($request->input('subject_id')); $i++) {
+            if ($request->input('teacher_id')[$i] != 0) {
+                $subjectTeacher[$request->input('subject_id')[$i]] = [
+                    'user_id' => $request->input('teacher_id')[$i]
                 ];
             }
         }
@@ -89,12 +88,13 @@ class DivisionController extends Controller
       ]);
     }
 
-    public function studentsUpdate($id)
+    public function studentsUpdate(Request $request, $id)
     {
         User::where('division_id', $id)->update(['division_id' => null]);
 
-        if (request('user_id')) {
-            foreach (request('user_id') as $userId) {
+
+        if ($request->input('user_id')) {
+            foreach ($request->input('user_id') as $userId) {
                 User::where('id', $userId)->update(['division_id' => $id]);
             }
         }

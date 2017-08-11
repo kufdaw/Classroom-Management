@@ -28,9 +28,9 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $this->validate(request(), [
+        $this->validate($request, [
             'name' => 'required|alpha|min:2',
             'surname' => 'required|alpha|min:2',
             'email' => 'required',
@@ -41,11 +41,11 @@ class ProfileController extends Controller
         $token = str_random(64);
 
         $user = User::create([
-            'name' => request('name'),
-            'surname' => request('surname'),
-            'email' => request('email'),
-            'birth_date' => request('date'),
-            'role_id' => request('role'),
+            'name' => $request->input('name'),
+            'surname' => $request->input('surname'),
+            'email' => $request->input('email'),
+            'birth_date' => $request->input('date'),
+            'role_id' => $request->input('role'),
             'registration_token' => $token,
             'password' => bcrypt(str_random(20))
         ]);
@@ -69,15 +69,15 @@ class ProfileController extends Controller
         return redirect()->route('home');
     }
 
-    public function confirm($token)
+    public function confirm(Request $request, $token)
     {
-        $this->validate(request(), [
+        $this->validate($request, [
             'password' => 'required|confirmed'
         ]);
 
         $user = User::where('registration_token', $token)->first();
         $user->update([
-            'password' => bcrypt(request('password')),
+            'password' => bcrypt($request->input('password')),
             'registration_token' => null
         ]);
 
@@ -87,15 +87,15 @@ class ProfileController extends Controller
         return redirect()->route('home');
     }
 
-    public function update()
+    public function update(Request $request)
     {
-        $this->validate(request(), [
+        $this->validate($request, [
             'password_current' => 'required|matching_password',
             'password' => 'required|confirmed'
         ]);
 
         Auth::user()->update([
-            'password' => bcrypt(request('password'))
+            'password' => bcrypt($request->input('password'))
         ]);
 
         session()->flash('message', 'Your password has been successfully changed!');

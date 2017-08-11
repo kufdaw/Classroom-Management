@@ -15,14 +15,14 @@ class SubjectController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $this->validate(request(), [
+        $this->validate($request, [
             'subject' => 'required|min:2'
         ]);
 
         $subject = Subject::create([
-            'name' => request('subject')
+            'name' => $request->input('subject')
         ]);
 
 
