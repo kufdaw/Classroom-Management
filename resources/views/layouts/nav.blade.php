@@ -15,15 +15,17 @@
                 <a class="navbar-brand item" href="{{ route('profile') }}">
                     Edit Profile
                 </a>
-                <a class="navbar-brand item" href="{{ route('profile.create') }}">
-                    Add User
-                </a>
-                <a class="navbar-brand item" href="{{ route('subject.create') }}">
-                    Add subject
-                </a>
-                <a class="navbar-brand item" href="{{ route('division.create') }}">
-                    Divisions
-                </a>
+                @if (Auth::user()->role->name == 'admin')
+                    <a class="navbar-brand item" href="{{ route('profile.create') }}">
+                        Add User
+                    </a>
+                    <a class="navbar-brand item" href="{{ route('subject.create') }}">
+                        Add subject
+                    </a>
+                    <a class="navbar-brand item" href="{{ route('division.index') }}">
+                        Divisions
+                    </a>
+                @endif
             @else
                 <a class="navbar-brand item" href="{{ route('login') }}">
                     Sign in

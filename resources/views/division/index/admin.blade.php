@@ -8,7 +8,7 @@
 
         <div class="col-md-12">
 
-            <form method="POST" action="{{ route('division.create') }}">
+            <form method="POST" action="{{ route('division.store') }}">
 
                 {{ csrf_field() }}
 
@@ -27,7 +27,7 @@
                             @foreach ($divisions as $division)
                             <tr>
                                 <th class="col-md-2">{{ $division->name }}
-                                    <button type="button" class="btn btn-danger btn-sm delete-division" data-division="{{ $division->name }}" data-token="{{ csrf_token() }}" data-address="{{ route('division.delete', $division->id) }}">Delete</button>                                            
+                                    <button type="button" class="btn btn-danger btn-sm delete-division" data-division="{{ $division->name }}" data-token="{{ csrf_token() }}" data-address="{{ route('division.delete', $division->id) }}">Delete</button>
                                 </th>
                                 <th class="col-md-8 text-center table-tutor">{{ $division->tutors->name . ' ' . $division->tutors->surname }}</th>
                                 <th class="col-md-2">

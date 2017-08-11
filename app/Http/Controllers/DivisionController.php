@@ -9,12 +9,12 @@ use App\Subject;
 
 class DivisionController extends Controller
 {
-    public function create()
+    public function index()
     {
         $divisions = Division::get();
         $tutors = User::whereNotIn('id', Division::select('tutor_id')->get())->where('role_id', 2)->get();
 
-        return view('division.create', [
+        return view('division.index.view', [
             'divisions' => $divisions,
             'tutors' => $tutors
         ]);
@@ -35,7 +35,7 @@ class DivisionController extends Controller
 
         session()->flash('message', $division->name);
 
-        return redirect()->route('division.create');
+        return redirect()->route('division.index');
     }
 
     public function subjectsEdit(Request $request, $id)
