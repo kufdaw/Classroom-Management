@@ -1,6 +1,10 @@
-@php
-    if (Auth::user()->role->name == 'admin')
-        return view('division.index.admin');
-    elseif (Auth::user()->role->name == 'teacher')
-        return view('division.index.admin');
-@endphp
+@extends ('layouts.master')
+
+@section ('content')
+    @if (Auth::user()->role->name == 'admin')
+        @include('division.index.admin', ['divisions' => $divisions, 'tutors' => $tutors])
+    @endif
+    @if (Auth::user()->role->name == 'teacher')
+        @include('division.index.teacher', ['divisions' => $divisions, 'tutors' => $tutors])
+    @endif
+@endsection
