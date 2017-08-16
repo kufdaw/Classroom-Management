@@ -15,11 +15,11 @@
 
                     <div class="col-md-12 text-center">
                         <h2>Assigned subjects:</h2>
-                        <hr>
                         @if ($flash = session('message'))
-                        <div class="alert alert-success text-center" role="alert">
-                            <strong>{{ $flash }}</strong> subjects have been updated.
-                        </div>
+                            <hr>
+                            <div class="alert alert-success text-center" role="alert">
+                                <strong>{{ $flash }}</strong> subjects have been updated.
+                            </div>
                         @endif
                         <div class="table-responsive">
                             <table class="table">
@@ -63,11 +63,14 @@
                         <br>
                         <button type="submit" class="btn btn-warning">Update!</button>
                     </div>
-                    <hr>
-                    <a class="btn btn-info" href="{{ route('division.create') }}">Back</a>
-                    <hr>
+
                     @include ('layouts.errors')
                 </form>
+                <div class="col-md-12">
+                    <hr>
+                    <a class="btn btn-info" href="{{ route('division.index') }}">Back</a>
+                    <hr>
+                </div>
             </div>
         </div>
     </div>

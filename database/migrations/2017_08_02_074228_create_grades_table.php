@@ -17,7 +17,7 @@ class CreateGradesTable extends Migration
             $table->increments('id');
             $table->integer('value');
             $table->unsignedInteger('subject_id');
-            $table->unsignedInteger('division_id');
+            //$table->unsignedInteger('division_id');
             $table->unsignedInteger('student_id');
             $table->timestamps();
         });

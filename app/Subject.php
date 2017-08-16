@@ -24,4 +24,9 @@ class Subject extends Model
     {
         return $this->teachers()->where('division_subject.division_id', $id)->get();
     }
+
+    public function getSubjectByDivisionId($id)
+    {
+        return $this->teachers()->where('division_subject.division_id', $id)->get();
+    }
 }

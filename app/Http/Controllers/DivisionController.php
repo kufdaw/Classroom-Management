@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Division;
 use App\User;
 use App\Subject;
+use Illuminate\Support\Facades\Auth;
 
 class DivisionController extends Controller
 {
@@ -13,10 +14,12 @@ class DivisionController extends Controller
     {
         $divisions = Division::get();
         $tutors = User::whereNotIn('id', Division::select('tutor_id')->get())->where('role_id', 2)->get();
+        $teacherDivisions = User::find(Auth::user()->id)->divisions;
 
         return view('division.index.view', [
             'divisions' => $divisions,
-            'tutors' => $tutors
+            'tutors' => $tutors,
+            'teacherDivisions' => $teacherDivisions
         ]);
     }
 
@@ -38,6 +41,10 @@ class DivisionController extends Controller
         return redirect()->route('division.index');
     }
 
+    public function supervision()
+    {
+        $students = User::where('role_id', 1)->get();
+    }
     public function subjectsEdit(Request $request, $id)
     {
         $division = Division::where('id', $id)->first();
@@ -45,7 +52,7 @@ class DivisionController extends Controller
         $teachers = User::where('role_id', '2')->get();
 
 
-        return view('division.subjects.edit', [
+        return view('division.edit.admin.subjects', [
           'division' => $division,
           'subjects' => $subjects,
           'teachers' => $teachers
@@ -82,7 +89,7 @@ class DivisionController extends Controller
         $students = User::where('role_id', '3')->get();
 
 
-        return view('division.students.edit', [
+        return view('division.edit.admin.students', [
           'division' => $division,
           'students' => $students
       ]);

@@ -36,7 +36,7 @@
         </div>
         <div class="col-md-12">
             <hr>
-            <a class="btn btn-info" href="{{ route('division.create') }}">Back</a>
+            <a class="btn btn-info" href="{{ route('division.index') }}">Back</a>
             <hr>
         </div>
     </div>

@@ -15,7 +15,11 @@
                 <a class="navbar-brand item" href="{{ route('profile') }}">
                     Edit Profile
                 </a>
-                @if (Auth::user()->role->name == 'admin')
+                @if (Auth::user()->hasRole('teacher'))
+                <a class="navbar-brand item" href="{{ route('division.index') }}">
+                    Divisions
+                </a>
+                @elseif (Auth::user()->hasRole('admin'))
                     <a class="navbar-brand item" href="{{ route('profile.create') }}">
                         Add User
                     </a>

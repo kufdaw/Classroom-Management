@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -30,6 +31,15 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo('App\Role');
+    }
+
+    public function hasRole($role)
+    {
+        if (Auth::user()->role->name === $role) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function subjects()
