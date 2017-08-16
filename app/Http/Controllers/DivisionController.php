@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use Illuminate\Http\Request;
 use App\Division;
 use App\User;
@@ -13,7 +14,7 @@ class DivisionController extends Controller
     public function index()
     {
         $divisions = Division::get();
-        $tutors = User::whereNotIn('id', Division::select('tutor_id')->get())->where('role_id', 2)->get();
+        $tutors = User::whereNotIn('id', Division::select('tutor_id')->get())->where('role_id', Role::ROLE_TEACHER)->get();
         $teacherDivisions = User::find(Auth::user()->id)->divisions;
 
         return view('division.index.view', [
@@ -43,14 +44,13 @@ class DivisionController extends Controller
 
     public function supervision()
     {
-        $students = User::where('role_id', 1)->get();
+        $students = User::where('role_id', Role::ROLE_ADMIN)->get();
     }
     public function subjectsEdit(Request $request, $id)
     {
         $division = Division::where('id', $id)->first();
         $subjects = Subject::get();
-        $teachers = User::where('role_id', '2')->get();
-
+        $teachers = User::where('role_id', Role::ROLE_TEACHER)->get();
 
         return view('division.edit.admin.subjects', [
           'division' => $division,
@@ -86,8 +86,7 @@ class DivisionController extends Controller
     public function studentsEdit($id)
     {
         $division = Division::where('id', $id)->first();
-        $students = User::where('role_id', '3')->get();
-
+        $students = User::where('role_id', Role::ROLE_STUDENT)->get();
 
         return view('division.edit.admin.students', [
           'division' => $division,
