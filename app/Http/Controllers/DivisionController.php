@@ -43,8 +43,8 @@ class DivisionController extends Controller
 
     public function supervision()
     {
-        $students = User::where('role_id', 1)->get();
     }
+
     public function subjectsEdit(Request $request, $id)
     {
         $division = Division::where('id', $id)->first();

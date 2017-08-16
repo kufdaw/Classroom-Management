@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Division', 'division_subject')->withPivot('subject_id');
     }
+
+    public function grades()
+    {
+        // return $this->belongsTo()
+    }
 }
