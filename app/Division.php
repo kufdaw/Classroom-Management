@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Division extends Model
 {
     protected $fillable = [
-            'name', 'tutor_id'
-        ];
+        'name', 'tutor_id'
+    ];
 
     public function subjects()
     {

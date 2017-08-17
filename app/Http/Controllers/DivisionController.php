@@ -8,55 +8,45 @@ use App\Division;
 use App\User;
 use App\Subject;
 use Illuminate\Support\Facades\Auth;
+use App\Grade;
 
 class DivisionController extends Controller
 {
     public function index()
     {
-        $divisions = Division::get();
-        $tutors = User::whereNotIn('id', Division::select('tutor_id')->get())->where('role_id', Role::ROLE_TEACHER)->get();
-        $teacherDivisions = User::find(Auth::user()->id)->divisions;
-
         return view('division.index.view', [
-            'divisions' => $divisions,
-            'tutors' => $tutors,
-            'teacherDivisions' => $teacherDivisions
+            'divisions' => Division::get(),
+            'tutors' => User::whereNotIn('id', Division::select('tutor_id')->get())
+                ->where('role_id', Role::ROLE_TEACHER)->get()
         ]);
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'division' => 'required|alpha_num|min:2|unique:divisions,name',
-            'tutor' => 'required'
+            'name' => 'required|alpha_num|min:2|unique:divisions,name',
+            'tutor_id' => 'required'
         ]);
 
-        $division = Division::create([
-            'name' => $request->input('division'),
-            'tutor_id' => $request->input('tutor')
-        ]);
+        $division = Division::create($request->all());
 
-
-        session()->flash('message', $division->name);
-
-        return redirect()->route('division.index');
+        return redirect()->route('division.index')->withMessage($division->name);
     }
 
-    public function supervision()
-    {
-        $students = User::where('role_id', Role::ROLE_ADMIN)->get();
-    }
+    // public function supervision()
+    // {
+    //     $students = User::where('role_id', Role::ROLE_ADMIN)->get();
+    //     return view('division.edit.teacher.supervision', [
+    //         'students' => User::where('division_id')
+    //     ]);
+    // }
 
-    public function subjectsEdit(Request $request, $id)
+    public function subjectsEdit($id)
     {
-        $division = Division::where('id', $id)->first();
-        $subjects = Subject::get();
-        $teachers = User::where('role_id', Role::ROLE_TEACHER)->get();
-
         return view('division.edit.admin.subjects', [
-          'division' => $division,
-          'subjects' => $subjects,
-          'teachers' => $teachers
+          'division' => Division::find($id),
+          'subjects' => Subject::get(),
+          'teachers' => User::where('role_id', Role::ROLE_TEACHER)->get()
       ]);
     }
 
@@ -86,31 +76,50 @@ class DivisionController extends Controller
 
     public function studentsEdit($id)
     {
-        $division = Division::where('id', $id)->first();
-        $students = User::where('role_id', Role::ROLE_STUDENT)->get();
-
         return view('division.edit.admin.students', [
-          'division' => $division,
-          'students' => $students
+          'division' => Division::find($id),
+          'students' => User::where('role_id', Role::ROLE_STUDENT)->get()
       ]);
     }
 
     public function studentsUpdate(Request $request, $id)
     {
-        User::where('division_id', $id)->update(['division_id' => null]);
-
+        User::where('division_id', $id)->update([
+            'division_id' => null
+        ]);
 
         if ($request->input('user_id')) {
             foreach ($request->input('user_id') as $userId) {
-                User::where('id', $userId)->update(['division_id' => $id]);
+                User::where('id', $userId)->update([
+                    'division_id' => $id
+                ]);
             }
         }
 
         $division = Division::find($id);
 
-        session()->flash('message', $division->name);
+        return redirect()->route('division.students.edit', $id)->withMessage($division->name);
+    }
 
-        return redirect()->route('division.students.edit', $id);
+    public function gradesEdit($divisionId, $subjectId)
+    {
+        return view('division.edit.teacher.grades-edit', [
+            'division' => Division::find($divisionId),
+            'subjectId' => $subjectId
+        ]);
+    }
+
+    public function gradeAdd(Request $request, $subjectId, $studentId)
+    {
+        // $this->validate($request, [
+        //     'value' => 'required'
+        // ]);
+
+        Grade::create([
+            'value' => $request->input('grade'),
+            'subject_id' => $subjectId,
+            'student_id' => $studentId
+        ]);
     }
 
     public function delete($id)

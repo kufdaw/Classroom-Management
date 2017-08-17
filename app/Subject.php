@@ -24,4 +24,9 @@ class Subject extends Model
     {
         return $this->teachers()->where('division_subject.division_id', $id);
     }
+
+    public function grades()
+    {
+        return $this->hasMany('App\Grade');
+    }
 }

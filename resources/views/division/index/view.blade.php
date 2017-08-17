@@ -6,7 +6,7 @@
         @include('division.index.admin', ['divisions' => $divisions, 'tutors' => $tutors])
 
     @elseif (Auth::user()->hasRole('teacher'))
-        @include('division.index.teacher', ['divisions' => $divisions, 'tutors' => $tutors, 'teacherDivisions' => $teacherDivisions])
+        @include('division.index.teacher', ['divisions' => $divisions, 'tutors' => $tutors])
     @endif
 
 @endsection

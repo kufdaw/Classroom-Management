@@ -42,7 +42,7 @@ class User extends Authenticatable
         }
     }
 
-    public function subjects()
+    public function subjectsTutor()
     {
         return $this->belongsToMany('App\Subject', 'division_subject')->withPivot('division_id');
     }
@@ -54,6 +54,6 @@ class User extends Authenticatable
 
     public function grades()
     {
-        // return $this->belongsTo()
+        return $this->hasMany('App\Grade');
     }
 }

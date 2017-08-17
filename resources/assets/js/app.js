@@ -21,6 +21,12 @@
 //     el: '#app'
 // });
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 $('.delete-subject').click(function(){
     var _this = this;
     var token = $(this).data('token');
@@ -64,4 +70,21 @@ $('.delete-division').click(function(){
      }
  });
 
-$(".assign-students").select2();
+$('.assign-students').select2();
+
+$('.add').click(function(){
+    var gradeElement = $(this).parent().find('.add-grade');
+    var gradeList = $(this).parent().parent().find('.grade-list');
+    var grade = gradeElement.val();
+     $.ajax({
+         type: "POST",
+         url: gradeElement.data('address'),
+         data: {grade: grade},
+         success: function (data) {
+             gradeList.append('<a class="btn btn-secondary btn-sm"> '+ grade +' </a>');
+         },
+         error: function (data) {
+             alert('Error: you didn\'t added grade :/', data);
+         }
+     });
+ });

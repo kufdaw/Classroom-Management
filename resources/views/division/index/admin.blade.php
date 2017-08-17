@@ -46,12 +46,12 @@
                 <h1>Add new division</h1>
                 <div class="form-group">
                     <label for="division">Division name:</label>
-                    <input type="text" class="form-control" id="division" name="division">
+                    <input type="text" class="form-control" id="division" name="name">
                 </div>
 
                 <div class="form-group">
                     <label for="tutor">Tutor:</label>
-                    <select class="custom-select" name="tutor">
+                    <select class="custom-select" name="tutor_id">
                         @foreach($tutors as $tutor)
                         <option value="{{ $tutor->id }}">
                             {{ $tutor->name . ' ' . $tutor->surname }}

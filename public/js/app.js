@@ -60,28 +60,19 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 40:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 8:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(9);
-module.exports = __webpack_require__(40);
+__webpack_require__(1);
+module.exports = __webpack_require__(2);
 
 
 /***/ }),
-
-/***/ 9:
+/* 1 */
 /***/ (function(module, exports) {
 
 //
@@ -106,6 +97,12 @@ module.exports = __webpack_require__(40);
 // const app = new Vue({
 //     el: '#app'
 // });
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
 $('.delete-subject').click(function () {
     var _this = this;
@@ -150,8 +147,30 @@ $('.delete-division').click(function () {
     }
 });
 
-$(".assign-students").select2();
+$('.assign-students').select2();
+
+$('.add').click(function () {
+    var gradeElement = $(this).parent().find('.add-grade');
+    var gradeList = $(this).parent().parent().find('.grade-list');
+    var grade = gradeElement.val();
+    $.ajax({
+        type: "POST",
+        url: gradeElement.data('address'),
+        data: { grade: grade },
+        success: function success(data) {
+            gradeList.append('<a class="btn btn-secondary btn-sm"> ' + grade + ' </a>');
+        },
+        error: function error(data) {
+            alert('Error: you didn\'t added grade :/', data);
+        }
+    });
+});
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
-
-/******/ });
+/******/ ]);
