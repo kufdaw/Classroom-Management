@@ -161,11 +161,12 @@ $('.add').click(function () {
         success: function success(data) {
             var $aElement = $('<a/>', {
                 "class": 'btn btn-secondary btn-sm edit-grade',
-                "data-address-delete": '/division/subjects/grade-delete/' + data.gradeId,
-                "data-address-update": '/division/subjects/grade-update/' + data.gradeId
+                "data-address-delete": data.urlDelete,
+                "data-address-update": data.urlUpdate
             });
             $aElement.html($grade);
             $gradeList.append($aElement);
+            $gradeList.append(' ');
         },
         error: function error(data) {
             alert('Error: you didn\'t added grade :/', data);
@@ -194,7 +195,6 @@ $('body').on('dblclick', 'a.edit-grade', function () {
 
     $editInput.blur(function () {
         $grade = $(this).val();
-
         var _this = this;
         if ($grade != 0) {
 

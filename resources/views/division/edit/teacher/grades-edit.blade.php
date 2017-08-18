@@ -25,8 +25,8 @@
                                     @endforeach
                                 </td>
                                 <td>
-                                    <a class="btn btn-secondary btn-sm add" data-address="{{ route('division.subject.grade-add', ['subjectId' => $subjectId, 'studentId' => $student->id]) }}"><strong>+</strong></a>
                                     <input class="btn btn-secondary btn-sm form-control add-grade" name="grade" type="number" min="1" max="6" step="0.5">
+                                    <a class="btn btn-sm btn-secondary add" data-address="{{ route('division.subject.grade-add', ['subjectId' => $subjectId, 'studentId' => $student->id]) }}"><strong>+</strong></a>
                                 </td>
                             </tr>
                         @endforeach

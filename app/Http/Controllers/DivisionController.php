@@ -120,10 +120,10 @@ class DivisionController extends Controller
             'subject_id' => $subjectId,
             'student_id' => $studentId
         ]);
-
         return response()->json([
             'success' => true,
-            'gradeId' =>  $grade->id
+            'urlDelete' =>  route('division.subject.grade-delete', $grade->id),
+            'urlUpdate' => route('division.subject.grade-update', $grade->id)
         ]);
     }
 
@@ -132,8 +132,9 @@ class DivisionController extends Controller
         $this->validate($request, [
             'value' => 'required|matching_grade'
         ]);
-
-        $grade->update(['value' => $request->input('value')]);
+        if ($grade->value != $request->input('value')) {
+            $grade->update(['value' => $request->input('value')]);
+        }
     }
 
     public function gradeDelete(Grade $grade)
