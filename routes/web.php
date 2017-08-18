@@ -25,5 +25,8 @@ Route::get('/division/subjects/edit/{id}', 'DivisionController@subjectsEdit')->n
 Route::put('/division/subjects/edit/{id}', 'DivisionController@subjectsUpdate')->name('division.subjects.update');
 Route::get('/division/students/edit/{id}', 'DivisionController@studentsEdit')->name('division.students.edit');
 Route::put('/division/students/edit/{id}', 'DivisionController@studentsUpdate')->name('division.students.update');
+
 Route::get('/division/subjects/grades-edit/{divisionId}/{subjectId}', 'DivisionController@gradesEdit')->name('division.subjects.grades-edit');
 Route::post('/division/subjects/grades-edit/{subjectId}/{studentId}', 'DivisionController@gradeAdd')->name('division.subject.grade-add');
+Route::put('/division/subjects/grade-update/{grade}', 'DivisionController@gradeUpdate')->name('division.subject.grade-update');
+Route::delete('/division/subjects/grade-delete/{grade}', 'DivisionController@gradeDelete')->name('division.subject.grade-delete');

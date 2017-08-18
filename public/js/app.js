@@ -150,18 +150,85 @@ $('.delete-division').click(function () {
 $('.assign-students').select2();
 
 $('.add').click(function () {
-    var gradeElement = $(this).parent().find('.add-grade');
-    var gradeList = $(this).parent().parent().find('.grade-list');
-    var grade = gradeElement.val();
+    var $gradeElement = $(this).parent().find('.add-grade');
+    var $gradeList = $(this).parent().parent().find('.grade-list');
+    var $grade = $gradeElement.val();
+    var _this = this;
     $.ajax({
         type: "POST",
-        url: gradeElement.data('address'),
-        data: { grade: grade },
+        url: $(this).data('address'),
+        data: { value: $grade },
         success: function success(data) {
-            gradeList.append('<a class="btn btn-secondary btn-sm"> ' + grade + ' </a>');
+            var $aElement = $('<a/>', {
+                "class": 'btn btn-secondary btn-sm edit-grade',
+                "data-address-delete": '/division/subjects/grade-delete/' + data.gradeId,
+                "data-address-update": '/division/subjects/grade-update/' + data.gradeId
+            });
+            $aElement.html($grade);
+            $gradeList.append($aElement);
         },
         error: function error(data) {
             alert('Error: you didn\'t added grade :/', data);
+        }
+    });
+});
+
+$('body').on('dblclick', 'a.edit-grade', function () {
+    var $grade = $(this).html();
+    var $parent = $(this).parent();
+    var $gradeId = $(this).data('gradeId');
+    var $urlDelete = $(this).data('address-delete');
+    var $urlUpdate = $(this).data('address-update');
+
+    var $editInput = $('<input>', {
+        "class": 'btn btn-secondary btn-sm edit-grade',
+        "type": 'number',
+        "min": 1,
+        "max": 6,
+        "step": 0.5,
+        "value": $grade.trim()
+    });
+
+    $(this).replaceWith($editInput);
+    $editInput.focus();
+
+    $editInput.blur(function () {
+        $grade = $(this).val();
+
+        var _this = this;
+        if ($grade != 0) {
+
+            var $editedGrade = $('<a>', {
+                "class": 'btn btn-secondary btn-sm edit-grade'
+            });
+
+            $editedGrade.html($grade);
+
+            $.ajax({
+                type: "PUT",
+                url: $urlUpdate,
+                data: { value: $grade },
+                success: function success(data) {
+                    $(_this).replaceWith($editedGrade);
+                },
+                error: function error(data) {
+                    alert('Error: you didn\'t updated this grade :| ', data);
+                }
+            });
+        } else {
+
+            confirm('Are you sure about deleting this grade?');
+
+            $.ajax({
+                type: "DELETE",
+                url: $urlDelete,
+                success: function success() {
+                    $(_this).remove();
+                },
+                error: function error(data) {
+                    alert('Error: you didn\'t deleted grade', data);
+                }
+            });
         }
     });
 });

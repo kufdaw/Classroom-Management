@@ -19,6 +19,15 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('matching_password', function ($attribute, $value, $parameters, $validator) {
             return Hash::check($value, Auth::user()->password);
         });
+
+        Validator::extend('matching_grade', function ($attribute, $value, $parameters, $validator) {
+            for ($i = 1; $i <= 6; $i+=0.5) {
+                if ($i == $value) {
+                    return true;
+                }
+            }
+            return false;
+        });
     }
 
     /**

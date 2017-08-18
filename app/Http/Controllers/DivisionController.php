@@ -111,15 +111,34 @@ class DivisionController extends Controller
 
     public function gradeAdd(Request $request, $subjectId, $studentId)
     {
-        // $this->validate($request, [
-        //     'value' => 'required'
-        // ]);
+        $this->validate($request, [
+            'value' => 'required|matching_grade'
+        ]);
 
-        Grade::create([
-            'value' => $request->input('grade'),
+        $grade = Grade::create([
+            'value' => $request->input('value'),
             'subject_id' => $subjectId,
             'student_id' => $studentId
         ]);
+
+        return response()->json([
+            'success' => true,
+            'gradeId' =>  $grade->id
+        ]);
+    }
+
+    public function gradeUpdate(Request $request, Grade $grade)
+    {
+        $this->validate($request, [
+            'value' => 'required|matching_grade'
+        ]);
+
+        $grade->update(['value' => $request->input('value')]);
+    }
+
+    public function gradeDelete(Grade $grade)
+    {
+        $grade->delete();
     }
 
     public function delete($id)

@@ -21,12 +21,12 @@
                                 <td >{{ $student->name . ' ' . $student->surname }}</td>
                                 <td class="grade-list">
                                     @foreach(App\Subject::find($subjectId)->grades->where('student_id', $student->id) as $grade)
-                                        <a class="btn btn-secondary btn-sm">{{ $grade->value}}</a>
+                                        <a class="btn btn-secondary btn-sm edit-grade" data-address-update="{{ route('division.subject.grade-update', $grade->id) }}" data-address-delete="{{ route('division.subject.grade-delete', $grade->id) }}"> {{ $grade->value }} </a>
                                     @endforeach
                                 </td>
                                 <td>
-                                    <a class="btn btn-secondary btn-sm add"><strong>+</strong></a>
-                                    <input class="btn btn-secondary btn-sm form-control add-grade" name="grade" data-address="{{ route('division.subject.grade-add', ['subjectId' => $subjectId, 'studentId' => $student->id]) }}" type="number" min="1" max="6" step="0.5">
+                                    <a class="btn btn-secondary btn-sm add" data-address="{{ route('division.subject.grade-add', ['subjectId' => $subjectId, 'studentId' => $student->id]) }}"><strong>+</strong></a>
+                                    <input class="btn btn-secondary btn-sm form-control add-grade" name="grade" type="number" min="1" max="6" step="0.5">
                                 </td>
                             </tr>
                         @endforeach
