@@ -26,7 +26,10 @@ Route::put('/division/subjects/edit/{id}', 'DivisionController@subjectsUpdate')-
 Route::get('/division/students/edit/{id}', 'DivisionController@studentsEdit')->name('division.students.edit');
 Route::put('/division/students/edit/{id}', 'DivisionController@studentsUpdate')->name('division.students.update');
 
-Route::get('/division/subjects/grades-edit/{divisionId}/{subjectId}', 'DivisionController@gradesEdit')->name('division.subjects.grades-edit');
-Route::post('/division/subjects/grades-edit/{subjectId}/{studentId}', 'DivisionController@gradeAdd')->name('division.subject.grade-add');
-Route::put('/division/subjects/grade-update/{grade}', 'DivisionController@gradeUpdate')->name('division.subject.grade-update');
-Route::delete('/division/subjects/grade-delete/{grade}', 'DivisionController@gradeDelete')->name('division.subject.grade-delete');
+Route::group(['prefix' => '/division/subjects'], function () {
+    Route::get('/grades-edit/{division}/{subject}', 'DivisionController@gradesEdit')->name('division.subject.grades-edit');
+    Route::post('/grades-edit/{subjectId}/{studentId}', 'DivisionController@gradeAdd')->name('division.subject.grade-add');
+    Route::put('/grade-update/{grade}', 'DivisionController@gradeUpdate')->name('division.subject.grade-update');
+    Route::delete('/grade-delete/{grade}', 'DivisionController@gradeDelete')->name('division.subject.grade-delete');
+    Route::get('/grades-edit/{division}/{subject}/generateCSV', 'DivisionController@generateCSV')->name('division.subject.generate-csv');
+});

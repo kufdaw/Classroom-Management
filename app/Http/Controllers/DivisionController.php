@@ -9,6 +9,7 @@ use App\User;
 use App\Subject;
 use Illuminate\Support\Facades\Auth;
 use App\Grade;
+use App\Jobs\DownloadDivisionSummary;
 
 class DivisionController extends Controller
 {
@@ -101,11 +102,11 @@ class DivisionController extends Controller
         return redirect()->route('division.students.edit', $id)->withMessage($division->name);
     }
 
-    public function gradesEdit($divisionId, $subjectId)
+    public function gradesEdit(Division $division, Subject $subject)
     {
         return view('division.edit.teacher.grades-edit', [
-            'division' => Division::find($divisionId),
-            'subjectId' => $subjectId
+            'division' => $division,
+            'subject' => $subject
         ]);
     }
 
@@ -140,6 +141,11 @@ class DivisionController extends Controller
     public function gradeDelete(Grade $grade)
     {
         $grade->delete();
+    }
+
+    public function generateCSV(Division $division, Subject $subject)
+    {
+        dispatch(new DownloadDivisionSummary($division, $subject));
     }
 
     public function delete($id)

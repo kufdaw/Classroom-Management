@@ -17,7 +17,7 @@
                                 <td class="col-md-2">{{ $teacherDivision->name }}</td>
                                 <td class="col-md-3">{{ $teacherDivision->subjects()->find($teacherDivision->pivot->subject_id)['name'] }}</td>
                                 <td class="col-md-3">{{ $teacherDivision->tutors->name . ' ' . $teacherDivision->tutors->surname }}</td>
-                                <td class="col-md-4"><a class="btn btn-primary edit-division" href="{{ route('division.subjects.grades-edit', ['divisionId' => $teacherDivision->id, 'subjectId' => $teacherDivision->pivot->subject_id]) }}">Supervision</a></td>
+                                <td class="col-md-4"><a class="btn btn-primary edit-division" href="{{ route('division.subject.grades-edit', ['division' => $teacherDivision->id, 'subject' => $teacherDivision->pivot->subject_id]) }}">Supervision</a></td>
                             </tr>
                         @endforeach
                     </tbody>

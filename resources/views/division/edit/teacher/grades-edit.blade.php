@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>{{$division->name . ', ' . App\Subject::find($subjectId)->name}}</h1>
+            <h1>{{ $division->name . ', ' . $subject->name}}</h1>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -20,19 +20,26 @@
                             <tr>
                                 <td >{{ $student->name . ' ' . $student->surname }}</td>
                                 <td class="grade-list">
-                                    @foreach(App\Subject::find($subjectId)->grades->where('student_id', $student->id) as $grade)
+                                    @foreach($subject->grades->where('student_id', $student->id) as $grade)
                                         <a class="btn btn-secondary btn-sm edit-grade" data-address-update="{{ route('division.subject.grade-update', $grade->id) }}" data-address-delete="{{ route('division.subject.grade-delete', $grade->id) }}"> {{ $grade->value }} </a>
                                     @endforeach
                                 </td>
                                 <td>
                                     <input class="btn btn-secondary btn-sm form-control add-grade" name="grade" type="number" min="1" max="6" step="0.5">
-                                    <a class="btn btn-sm btn-secondary add" data-address="{{ route('division.subject.grade-add', ['subjectId' => $subjectId, 'studentId' => $student->id]) }}"><strong>+</strong></a>
+                                    <a class="btn btn-sm btn-secondary add" data-address="{{ route('division.subject.grade-add', ['subjectId' => $subject->id, 'studentId' => $student->id]) }}"><strong>+</strong></a>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <hr>
+            <a class="btn btn-warning" href="{{ route('division.subject.generate-csv', ['division' => $division->id, 'subject' => $subject->id]) }}">Generate CSV File</a>
+            <hr>
         </div>
     </div>
 </div>
