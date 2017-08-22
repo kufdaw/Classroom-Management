@@ -40,7 +40,7 @@
                                             </strong>
                                         </th>
                                         <th class="col-md-6">
-                                            <select class="custom-select" name="teacher_id[]">
+                                        <select class="custom-select" name="teacher_id[]">
                                                 <option value="0" selected> </option>
                                                 @foreach ($teachers as $teacher)
                                                     <option value="{{ $teacher->id }}" {{ ($subject->getTeacherByDivisionId($division->id)->first()['id'] == $teacher->id) ? 'selected' : '' }}>

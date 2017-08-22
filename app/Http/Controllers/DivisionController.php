@@ -10,6 +10,8 @@ use App\Subject;
 use Illuminate\Support\Facades\Auth;
 use App\Grade;
 use App\Jobs\DownloadDivisionSummary;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Redis;
 
 class DivisionController extends Controller
 {
@@ -145,7 +147,7 @@ class DivisionController extends Controller
 
     public function generateCSV(Division $division, Subject $subject)
     {
-        dispatch(new DownloadDivisionSummary($division, $subject));
+        Queue::push('DownlaodDivisionSummary', [$division, $subject]);
     }
 
     public function delete($id)

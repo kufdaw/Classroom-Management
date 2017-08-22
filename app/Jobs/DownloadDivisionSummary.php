@@ -9,6 +9,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Division;
 use App\Subject;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Redis;
 
 class DownloadDivisionSummary implements ShouldQueue
 {
@@ -33,20 +35,17 @@ class DownloadDivisionSummary implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function fire($job)
     {
-        $file = "nazwapliku";
+        $fileName = storage_path(Carbon::now()->timestamp . ".csv");
+        $file = fopen($fileName, 'w');
         foreach ($this->division->students as $student) {
             $studentRow = $student->name . ',' . $student->surname;
-            $grades = '"';
-            foreach ($this->subject->grades->where('student_id', $student->id) as $grade) {
-                $grades .= $grade->value . ', ';
-            }
-            $grades = rtrim($grades, ", ");
-            $grades .= '"';
-            $row = $studentRow . ',' . $grades;
-            echo $row . '<br>';
-            //fputcsv($file, $student->name)
+            $grades = implode(', ', $this->subject->grades->where('student_id', $student->id)->pluck('value')->toArray());
+            $row = [$studentRow, $grades];
+            fputcsv($file, $row);
         }
+        fclose($file);
+        $job->delete();
     }
 }
