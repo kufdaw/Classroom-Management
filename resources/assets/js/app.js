@@ -87,6 +87,7 @@ $('.add').click(function(){
                  "data-address-delete": data.urlDelete,
                  "data-address-update": data.urlUpdate
              });
+             $(_this).nearest('.add-grade').value(1);
              $aElement.html($grade);
              $gradeList.append($aElement);
              $gradeList.append(' ');
@@ -157,4 +158,49 @@ $('body').on('dblclick', 'a.edit-grade', function(){
         }
     });
 
+});
+
+$('.generate-csv').click(function() {
+    $(this).css('display', 'none');
+    var $generatingString = $('<span/>', {
+       "class": 'generating'
+    });
+    $generatingString.html('Generating file... <br>');
+    $(this).parent().append($generatingString);
+    var $urlGenerateCSV = $(this).data('generate-csv');
+    var $filePathToCheck = '/summaries/' +$.now() + '.csv';
+    var $filePath = 'public' + $filePathToCheck;
+
+    $.ajax({
+        type: 'POST',
+        url: $urlGenerateCSV,
+        data: {filePath: $filePath},
+        error: function (data) {
+            alert('cant generate file');
+        }
+    });
+    var _this = this;
+    var $generatingUrl= $('<a>', {
+       "href": $filePathToCheck,
+       "class": 'download-link'
+    });
+    function sendRequest() {
+        $.ajax({
+            type: 'HEAD',
+            url: $filePathToCheck,
+            success: function()
+            {
+                $generatingString.remove();
+                $generatingUrl.html('Click to download summary CSV.');
+                $(_this).parent().append($generatingUrl);
+            },
+            error: function()
+            {
+                setTimeout(function(){
+                    sendRequest();
+                }, 3000);
+            }
+        });
+    }
+    sendRequest();
 });

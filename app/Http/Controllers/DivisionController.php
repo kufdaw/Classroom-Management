@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Role;
-use Illuminate\Http\Request;
 use App\Division;
 use App\User;
 use App\Subject;
-use Illuminate\Support\Facades\Auth;
 use App\Grade;
 use App\Jobs\DownloadDivisionSummary;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class DivisionController extends Controller
@@ -57,7 +57,7 @@ class DivisionController extends Controller
     {
         $this->validate($request, [
             'subject_id' => 'required',
-            'teacher_id' => 'required'
+            'teacher_id' => 'reqhow to delete queue laraveluired'
         ]);
 
         $subjectTeacher = [];
@@ -119,7 +119,8 @@ class DivisionController extends Controller
         ]);
 
         $grade = Grade::create([
-            'value' => $request->input('value'),
+            'value' => $request->input('value'),        // $queue = Queue::pushOn('DownloadDivisionSummary', ['division' => $division, 'subject' => $subject]);
+        // dump($queue);
             'subject_id' => $subjectId,
             'student_id' => $studentId
         ]);
@@ -145,9 +146,9 @@ class DivisionController extends Controller
         $grade->delete();
     }
 
-    public function generateCSV(Division $division, Subject $subject)
+    public function generateCSV(Request $request, Division $division, Subject $subject)
     {
-        Queue::push('DownlaodDivisionSummary', [$division, $subject]);
+        dispatch(new DownloadDivisionSummary($division, $subject, $request->get('filePath')));
     }
 
     public function delete($id)

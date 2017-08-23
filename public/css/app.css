@@ -75,3 +75,10 @@ label .focus {
   padding: 0.25em 0 0.25em 0;
 }
 
+.generating {
+  font-family: open-sans, sans-serif;
+  font-size: 14px;
+  color: #449389;
+  font-weight: bold;
+}
+

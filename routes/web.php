@@ -31,5 +31,5 @@ Route::group(['prefix' => '/division/subjects'], function () {
     Route::post('/grades-edit/{subjectId}/{studentId}', 'DivisionController@gradeAdd')->name('division.subject.grade-add');
     Route::put('/grade-update/{grade}', 'DivisionController@gradeUpdate')->name('division.subject.grade-update');
     Route::delete('/grade-delete/{grade}', 'DivisionController@gradeDelete')->name('division.subject.grade-delete');
-    Route::get('/grades-edit/{division}/{subject}/generateCSV', 'DivisionController@generateCSV')->name('division.subject.generate-csv');
+    Route::post('/grades-edit/{division}/{subject}/summary', 'DivisionController@generateCSV')->name('division.subject.generate-csv');
 });
