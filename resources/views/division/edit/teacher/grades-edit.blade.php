@@ -24,7 +24,7 @@
                                         <a class="btn btn-secondary btn-sm edit-grade" data-address-update="{{ route('division.subject.grade-update', $grade->id) }}" data-address-delete="{{ route('division.subject.grade-delete', $grade->id) }}"> {{ $grade->value }} </a>
                                     @endforeach
                                 </td>
-                                <td>paragraph
+                                <td>
                                     <input class="btn btn-secondary btn-sm form-control add-grade" name="grade" type="number" min="1" max="6" step="0.5">
                                     <a class="btn btn-sm btn-secondary add" data-address="{{ route('division.subject.grade-add', ['subjectId' => $subject->id, 'studentId' => $student->id]) }}"><strong>+</strong></a>
                                 </td>

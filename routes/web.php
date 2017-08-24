@@ -33,3 +33,7 @@ Route::group(['prefix' => '/division/subjects'], function () {
     Route::delete('/grade-delete/{grade}', 'DivisionController@gradeDelete')->name('division.subject.grade-delete');
     Route::post('/grades-edit/{division}/{subject}/summary', 'DivisionController@generateCSV')->name('division.subject.generate-csv');
 });
+
+Route::get('/history', 'GradesHistoryController@index')->name('history.index');
+
+Route::get('/grades', 'GradeController@index')->name('grades.index');

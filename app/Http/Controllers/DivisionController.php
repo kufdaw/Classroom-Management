@@ -7,6 +7,7 @@ use App\Division;
 use App\User;
 use App\Subject;
 use App\Grade;
+use App\Http\Controllers\GradesHistoryController;
 use App\Jobs\DownloadDivisionSummary;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -119,11 +120,13 @@ class DivisionController extends Controller
         ]);
 
         $grade = Grade::create([
-            'value' => $request->input('value'),        // $queue = Queue::pushOn('DownloadDivisionSummary', ['division' => $division, 'subject' => $subject]);
-        // dump($queue);
+            'value' => $request->input('value'),
             'subject_id' => $subjectId,
             'student_id' => $studentId
         ]);
+
+        GradesHistoryController::logCreate($grade, Auth::user()->id);
+
         return response()->json([
             'success' => true,
             'urlDelete' =>  route('division.subject.grade-delete', $grade->id),
@@ -136,13 +139,17 @@ class DivisionController extends Controller
         $this->validate($request, [
             'value' => 'required|matching_grade'
         ]);
+
         if ($grade->value != $request->input('value')) {
             $grade->update(['value' => $request->input('value')]);
         }
+
+        GradesHistoryController::logUpdate($grade, Auth::user()->id);
     }
 
     public function gradeDelete(Grade $grade)
     {
+        GradesHistoryController::logDelete($grade, Auth::user()->id);
         $grade->delete();
     }
 

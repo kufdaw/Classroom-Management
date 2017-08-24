@@ -164,10 +164,10 @@ $('.add').click(function () {
                 "data-address-delete": data.urlDelete,
                 "data-address-update": data.urlUpdate
             });
-            $(_this).nearest('.add-grade').value(1);
             $aElement.html($grade);
             $gradeList.append($aElement);
             $gradeList.append(' ');
+            $gradeElement.val('');
         },
         error: function error(data) {
             alert('Error: you didn\'t added grade :/', data);
@@ -235,7 +235,7 @@ $('body').on('dblclick', 'a.edit-grade', function () {
 });
 
 $('.generate-csv').click(function () {
-    $(this).css('display', 'none');
+    $(this).hide();
     var $generatingString = $('<span/>', {
         "class": 'generating'
     });

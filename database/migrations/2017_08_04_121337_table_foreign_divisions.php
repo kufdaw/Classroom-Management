@@ -25,7 +25,7 @@ class TableForeignDivisions extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('divisions', function (Blueprint $table) {
             $table->dropForeign(['tutor_id']);
         });
     }

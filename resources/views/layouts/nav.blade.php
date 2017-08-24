@@ -15,9 +15,16 @@
                 <a class="navbar-brand item" href="{{ route('profile') }}">
                     Edit Profile
                 </a>
-                @if (Auth::user()->hasRole('teacher'))
+                @if (Auth::user()->hasRole('student'))
+                <a class="navbar-brand item" href="{{ route('grades.index') }}">
+                    Grades
+                </a>
+                @elseif (Auth::user()->hasRole('teacher'))
                 <a class="navbar-brand item" href="{{ route('division.index') }}">
                     Divisions
+                </a>
+                <a class="navbar-brand item" href="{{ route('history.index') }}">
+                    History
                 </a>
                 @elseif (Auth::user()->hasRole('admin'))
                     <a class="navbar-brand item" href="{{ route('profile.create') }}">
