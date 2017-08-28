@@ -20,7 +20,7 @@ class Division extends Model
         return $this->belongsToMany('App\User', 'division_subject')->withPivot('subject_id');
     }
 
-    public function tutors()
+    public function tutor()
     {
         return $this->hasOne('App\User', 'id', 'tutor_id');
     }

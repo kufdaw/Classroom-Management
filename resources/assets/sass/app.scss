@@ -1,25 +1,51 @@
 @import 'dist/include-media';
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
 
+html {
+    padding-top: 10rem;
+}
 
 body {
-    padding-top: 5rem;
+    font-family: 'Varela Round', sans-serif;
 }
 
 .navbar {
-    background: rgba(#002042, 0.9);
-    .item {
+    background: rgb(43,48,59);
+    padding: 0;
+    margin: 0;
+    a {
         color: #fff;
+    }
+    .nav-item {
+        padding: 0.8rem;
+        transition: 0.5s;
         &:hover {
-            color: #50daff;
-        }
-        &:first-child
-        {
-            &:hover {
-                color: #fff;
-            }
+            background: #4b5366;
         }
     }
 }
+
+.dropdown-menu {
+    background: rgb(43,48,59);
+    top: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+}
+
+.dropdown-item {
+    display: inline-block;
+    padding: 1em;
+    white-space: nowrap;
+    border-radius: none;
+    background: none;
+    &:hover {
+        background: #4b5366;
+        color: #fff;
+    }
+}
+
 
 .starter-template {
     padding: 3rem 1.5rem;
@@ -82,6 +108,7 @@ label .focus {
 .edit-grade, .add-grade {
     width: 3.5em;
     padding: 0.25em 0 0.25em 0;
+    margin: 0.15em 0em 0.15em 0em;
 }
 
 .generating {
@@ -89,4 +116,16 @@ label .focus {
     font-size: 14px;
     color: rgb(68, 147, 137);
     font-weight: bold;
+}
+
+.mail-notification {
+    border-radius: 3px;
+    margin: 1em;
+    padding: 1em;
+}
+
+@include media-breakpoint-up(md) {
+    .navbar {
+        padding: 1rem;
+    }
 }

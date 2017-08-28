@@ -1,20 +1,50 @@
+@import url(https://fonts.googleapis.com/css?family=Varela+Round);html {
+  padding-top: 10rem;
+}
+
 body {
-  padding-top: 5rem;
+  font-family: 'Varela Round', sans-serif;
 }
 
 .navbar {
-  background: rgba(0, 32, 66, 0.9);
+  background: #2b303b;
+  padding: 1rem;
+  margin: 0;
 }
 
-.navbar .item {
+.navbar a {
   color: #fff;
 }
 
-.navbar .item:hover {
-  color: #50daff;
+.navbar .nav-item {
+  padding: 0.8rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
-.navbar .item:first-child:hover {
+.navbar .nav-item:hover {
+  background: #4b5366;
+}
+
+.dropdown-menu {
+  background: #2b303b;
+  top: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.dropdown-item {
+  display: inline-block;
+  padding: 1em;
+  white-space: nowrap;
+  border-radius: none;
+  background: none;
+}
+
+.dropdown-item:hover {
+  background: #4b5366;
   color: #fff;
 }
 
@@ -73,6 +103,7 @@ label .focus {
 .add-grade {
   width: 3.5em;
   padding: 0.25em 0 0.25em 0;
+  margin: 0.15em 0em 0.15em 0em;
 }
 
 .generating {
@@ -80,5 +111,11 @@ label .focus {
   font-size: 14px;
   color: #449389;
   font-weight: bold;
+}
+
+.mail-notification {
+  border-radius: 3px;
+  margin: 1em;
+  padding: 1em;
 }
 

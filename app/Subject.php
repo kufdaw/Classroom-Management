@@ -29,4 +29,9 @@ class Subject extends Model
     {
         return $this->hasMany('App\Grade');
     }
+
+    public function getGradesByStudentId($id)
+    {
+        return $this->grades()->where('student_id', $id);
+    }
 }

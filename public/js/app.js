@@ -277,11 +277,35 @@ $('.generate-csv').click(function () {
     sendRequest();
 });
 
+$('.mail-notification').dblclick(function () {
+    var $url = $(this).data('address');
+    var _this = this;
+    $.ajax({
+        type: 'PUT',
+        url: $url,
+        success: function success(data) {
+            console.log(data['if-notify']);
+            if (parseInt(data['if-notify'])) {
+                $(_this).removeClass('bg-warning');
+                $(_this).addClass('bg-success');
+                $(_this).html('Now you are staying up-dated all the time with your grades by the email!');
+            } else {
+                $(_this).removeClass('bg-success');
+                $(_this).addClass('bg-warning');
+                $(_this).html('We are sad that you are not subscribe your grades anymore :( You can change your mind all the time!');
+            }
+        },
+        error: function error(data) {
+            alert('nara');
+        }
+    });
+});
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed: ModuleBuildError: Module build failed: \n@include media-breakpoint-up(md) {\n        ^\n      No mixin named media-breakpoint-up\n\nBacktrace:\n\tstdin:127\n      in /var/www/html/classroom-management/resources/assets/sass/app.scss (line 127, column 10)\n    at runLoaders (/var/www/html/classroom-management/node_modules/webpack/lib/NormalModule.js:194:19)\n    at /var/www/html/classroom-management/node_modules/loader-runner/lib/LoaderRunner.js:364:11\n    at /var/www/html/classroom-management/node_modules/loader-runner/lib/LoaderRunner.js:230:18\n    at context.callback (/var/www/html/classroom-management/node_modules/loader-runner/lib/LoaderRunner.js:111:13)\n    at Object.asyncSassJobQueue.push [as callback] (/var/www/html/classroom-management/node_modules/sass-loader/lib/loader.js:55:13)\n    at Object.<anonymous> (/var/www/html/classroom-management/node_modules/async/dist/async.js:2244:31)\n    at Object.callback (/var/www/html/classroom-management/node_modules/async/dist/async.js:906:16)\n    at options.error (/var/www/html/classroom-management/node_modules/node-sass/lib/index.js:294:32)");
 
 /***/ })
 /******/ ]);

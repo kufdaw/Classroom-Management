@@ -1,6 +1,6 @@
-<nav class="navbar fixed-top navbar-light bg-faded">
-    <div class="container">
 
+<nav class="navbar fixed-top">
+    <div class="container">
             @if (Auth::check())
                 <a class="navbar-brand item" href="#">
                     Welcome,
@@ -12,8 +12,13 @@
                 <a class="navbar-brand item" href="{{ route('logout') }}">
                     Log out
                 </a>
-                <a class="navbar-brand item" href="{{ route('profile') }}">
+                <a class="navbar-brand item toggle-dropdown" href="{{ route('profile') }}">
                     Edit Profile
+                    <div class="drop-down">
+                        <a href="#"> dupa </a>
+                        <a href="#"> dupa </a>
+                        <a href="#"> dupa </a>
+                    </div>
                 </a>
                 @if (Auth::user()->hasRole('student'))
                 <a class="navbar-brand item" href="{{ route('grades.index') }}">
@@ -36,6 +41,9 @@
                     <a class="navbar-brand item" href="{{ route('division.index') }}">
                         Divisions
                     </a>
+                    <a class="navbar-brand item" href="{{ route('division.index') }}">
+                        Statistics
+                    </a>
                 @endif
             @else
                 <a class="navbar-brand item" href="{{ route('login') }}">
@@ -44,4 +52,4 @@
             @endif
         <a class="navbar-brand item" href="{{ route('home') }}">Home</a>
     </div>
-</nav>
+</nav> -->

@@ -7,6 +7,7 @@ use App\Division;
 use App\User;
 use App\Subject;
 use App\Grade;
+use App\Mail\GradeNotification;
 use App\Http\Controllers\GradesHistoryController;
 use App\Jobs\DownloadDivisionSummary;
 use Carbon\Carbon;
@@ -58,7 +59,7 @@ class DivisionController extends Controller
     {
         $this->validate($request, [
             'subject_id' => 'required',
-            'teacher_id' => 'reqhow to delete queue laraveluired'
+            'teacher_id' => 'required'
         ]);
 
         $subjectTeacher = [];
@@ -124,6 +125,12 @@ class DivisionController extends Controller
             'subject_id' => $subjectId,
             'student_id' => $studentId
         ]);
+
+        $student = User::find($studentId);
+        $subject = Subject::find($subjectId);
+        if ($student->mail_notification == 1) {
+            \Mail::to($student)->queue(new GradeNotification($student, $grade, $subject));
+        }
 
         GradesHistoryController::logCreate($grade, Auth::user()->id);
 

@@ -204,3 +204,29 @@ $('.generate-csv').click(function() {
     }
     sendRequest();
 });
+
+$('.mail-notification').dblclick(function() {
+    var $url = $(this).data('address');
+    var _this = this;
+    $.ajax({
+        type: 'PUT',
+        url: $url,
+        success: function(data)
+        {
+            console.log(data['if-notify']);
+            if(parseInt(data['if-notify'])){
+                $(_this).removeClass('bg-warning');
+                $(_this).addClass('bg-success');
+                $(_this).html('Now you are staying up-dated all the time with your grades by the email!');
+            } else {
+                $(_this).removeClass('bg-success');
+                $(_this).addClass('bg-warning');
+                $(_this).html('We are sad that you are not subscribe your grades anymore :( You can change your mind all the time!');
+            }
+        },
+        error: function(data)
+        {
+            alert('nara');
+        }
+    });
+});

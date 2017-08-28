@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('registration_token')->nullable();
             $table->date('birth_date');
+            $table->integer('mail_notification')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

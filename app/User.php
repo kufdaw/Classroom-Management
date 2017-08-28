@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'birth_date', 'registration_token', 'surname'
+        'name', 'email', 'password', 'role_id', 'birth_date', 'registration_token', 'surname', 'mail_notification'
     ];
 
     /**
@@ -59,11 +59,6 @@ class User extends Authenticatable
 
     public function subjects()
     {
-        return $this->belongsToMany('App\Subject', 'division_subject', 'id', 'subject_id');
-    }
-
-    public function grades()
-    {
-        return $this->hasMany('App\Grade', 'student_id', 'id');
+        return $this->belongsToMany('App\Subject', 'division_subject');
     }
 }

@@ -37,3 +37,4 @@ Route::group(['prefix' => '/division/subjects'], function () {
 Route::get('/history', 'GradesHistoryController@index')->name('history.index');
 
 Route::get('/grades', 'GradeController@index')->name('grades.index');
+Route::put('/grades/{ifNotify}', 'GradeController@toggleNotification')->name('grades.toggleNotification');

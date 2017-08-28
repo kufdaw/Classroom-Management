@@ -13,4 +13,14 @@ class GradeController extends Controller
             'student' => Auth::user()
         ]);
     }
+
+    public function toggleNotification($ifNotify)
+    {
+        $user = Auth::user();
+        $user->update(['mail_notification' => $ifNotify]);
+        return response()->json([
+            'success' => true,
+            'if-notify' => $user->mail_notification
+        ]);
+    }
 }
