@@ -230,3 +230,13 @@ $('.mail-notification').dblclick(function() {
         }
     });
 });
+
+$('#table').DataTable();
+
+$('#example').dataTable( {
+    "columnDefs": [ {
+      "targets"  : 'no-sort',
+      "orderable": false,
+      "order": []
+    }]
+});

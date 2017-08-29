@@ -8,6 +8,7 @@ Route::post('/login', 'SessionController@store');
 Route::get('/logout', 'SessionController@destroy')->name('logout');
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::get('/profile/all', 'ProfileController@viewAll')->name('profile.all');
 Route::post('/profile', 'ProfileController@update');
 Route::get('/profile/create', 'ProfileController@create')->name('profile.create');
 Route::post('/profile/create', 'ProfileController@store');

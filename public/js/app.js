@@ -301,11 +301,21 @@ $('.mail-notification').dblclick(function () {
     });
 });
 
+$('#table').DataTable();
+
+$('#example').dataTable({
+    "columnDefs": [{
+        "targets": 'no-sort',
+        "orderable": false,
+        "order": []
+    }]
+});
+
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed: ModuleBuildError: Module build failed: \n@include media-breakpoint-up(md) {\n        ^\n      No mixin named media-breakpoint-up\n\nBacktrace:\n\tstdin:127\n      in /var/www/html/classroom-management/resources/assets/sass/app.scss (line 127, column 10)\n    at runLoaders (/var/www/html/classroom-management/node_modules/webpack/lib/NormalModule.js:194:19)\n    at /var/www/html/classroom-management/node_modules/loader-runner/lib/LoaderRunner.js:364:11\n    at /var/www/html/classroom-management/node_modules/loader-runner/lib/LoaderRunner.js:230:18\n    at context.callback (/var/www/html/classroom-management/node_modules/loader-runner/lib/LoaderRunner.js:111:13)\n    at Object.asyncSassJobQueue.push [as callback] (/var/www/html/classroom-management/node_modules/sass-loader/lib/loader.js:55:13)\n    at Object.<anonymous> (/var/www/html/classroom-management/node_modules/async/dist/async.js:2244:31)\n    at Object.callback (/var/www/html/classroom-management/node_modules/async/dist/async.js:906:16)\n    at options.error (/var/www/html/classroom-management/node_modules/node-sass/lib/index.js:294:32)");
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

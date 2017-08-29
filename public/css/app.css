@@ -1,14 +1,24 @@
 @import url(https://fonts.googleapis.com/css?family=Varela+Round);html {
-  padding-top: 10rem;
+  padding-top: 7rem;
 }
 
 body {
   font-family: 'Varela Round', sans-serif;
 }
 
+.nav-welcome {
+  padding-top: 1.2rem;
+  color: #fff;
+}
+
+.nav-link {
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
 .navbar {
   background: #2b303b;
-  padding: 1rem;
+  padding: 0;
   margin: 0;
 }
 
@@ -18,12 +28,16 @@ body {
 
 .navbar .nav-item {
   padding: 0.8rem;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .navbar .nav-item:hover {
   background: #4b5366;
+}
+
+.navbar-nav .logout:hover {
+  background: #7a3c38;
 }
 
 .dropdown-menu {

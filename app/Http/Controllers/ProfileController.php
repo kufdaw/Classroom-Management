@@ -102,4 +102,11 @@ class ProfileController extends Controller
 
         return redirect()->create('profile');
     }
+
+    public function viewAll()
+    {
+        return view('profile.all', [
+            'users' => User::orderBy('role_id')->get()
+        ]);
+    }
 }
