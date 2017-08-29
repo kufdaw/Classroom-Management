@@ -6,29 +6,38 @@
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
-                <table class="table" id="table">
+                <table class="table" id="users-table">
                     <thead>
                         <tr>
-                            <th>Full Name</th>
+                            <th>Name</th>
+                            <th>Surname</th>
                             <th>Role</th>
-                            <th class="no-sort">Action</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach($users as $user)
-                        <tr>
-                            <td>{{ $user->name . ' ' . $user->surname }}</td>
-                            <td>{{ $user->role->name }} </td>
-                            <td>
-                                 <a class="btn btn-info btn-md edit-division" href="#">Edit</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
                 </table>
             </div>
+            <hr>
         </div>
     </div>
 </div>
-
-@endsection
+@stop
+@push('scripts')
+<script>
+    $(function() {
+        var action = 'chuj';
+        $('#users-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '/profile/all-data',
+            aaSorting: [[2, 'asc']],
+            columns: [
+                {data: 'name'},
+                {data: 'surname'},
+                {data: 'role.name', name: 'role.id'},
+                {data: 'action', orderable: false, searchable: false}
+            ]
+        });
+    });
+</script>
+@endpush

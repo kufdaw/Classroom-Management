@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Role;
 use App\User;
 use App\Mail\Welcome;
+use Yajra\Datatables\Datatables;
 
 class ProfileController extends Controller
 {
@@ -103,10 +104,25 @@ class ProfileController extends Controller
         return redirect()->create('profile');
     }
 
+    public function data(Datatables $datatables)
+    {
+        $user = User::with('role')->select('users.*');
+
+        return $datatables->eloquent($user)
+                            ->addColumn('action', function ($user) {
+                                return '<a class="btn btn-info btn-sm" href="'. route('profile.edit', $user->id) .'">Edit</a> <a class="btn btn-danger btn-sm" href="'. route('profile.delete', $user->id) .'">Delete</a>';
+                            })
+                            ->make(true);
+    }
+
     public function viewAll()
     {
-        return view('profile.all', [
-            'users' => User::orderBy('role_id')->get()
-        ]);
+        return view('profile.all');
+    }
+
+    public function delete($id)
+    {
+        $subject = Subject::find($id);
+        $subject->delete();
     }
 }

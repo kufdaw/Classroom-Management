@@ -8,12 +8,15 @@ Route::post('/login', 'SessionController@store');
 Route::get('/logout', 'SessionController@destroy')->name('logout');
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
-Route::get('/profile/all', 'ProfileController@viewAll')->name('profile.all');
 Route::post('/profile', 'ProfileController@update');
 Route::get('/profile/create', 'ProfileController@create')->name('profile.create');
 Route::post('/profile/create', 'ProfileController@store');
 Route::get('/profile/confirm/{token}', 'ProfileController@setPassword')->name('profile.setPassword');
 Route::post('/profile/confirm/{token}', 'ProfileController@confirm')->name('profile.confirm');
+Route::get('/profile/all-data', 'ProfileController@data')->name('profile.data');
+Route::get('/profile/all', 'ProfileController@viewAll')->name('profile.all');
+Route::get('/profile/delete/{id}', 'ProfileController@delete')->name('profile.delete');
+Route::get('/profile/edit/{id}', 'ProfileController@edit')->name('profile.edit');
 
 Route::get('/subject/create', 'SubjectController@create')->name('subject.create');
 Route::post('/subject/create', 'SubjectController@store');
