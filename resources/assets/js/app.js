@@ -116,7 +116,6 @@ $('body').on('dblclick', 'a.edit-grade', function(){
 
     $(this).replaceWith($editInput);
     $editInput.focus();
-
     $editInput.blur(function() {
         $grade = $(this).val();
         var _this = this;
@@ -157,7 +156,6 @@ $('body').on('dblclick', 'a.edit-grade', function(){
 
         }
     });
-
 });
 
 $('.generate-csv').click(function() {
@@ -229,4 +227,24 @@ $('.mail-notification').dblclick(function() {
             alert('nara');
         }
     });
+});
+
+$('body').on('click', '.user-delete', function(){
+    var _this = this;
+    var confirmation = confirm("Are you sure?");
+    if(confirmation) {
+         $.ajax({
+             type: "DELETE",
+             url: $(_this).data('address'),
+             success: function (data) {
+                 alert(data);
+                 $(_this).closest('tr').remove();
+             },
+             error: function (data) {
+                 alert('Error:', data);
+             }
+         });
+     } else {
+         return false;
+     }
 });

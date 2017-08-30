@@ -74,9 +74,8 @@ class DivisionController extends Controller
 
         $division = Division::find($id);
         $division->subjects()->sync($subjectTeacher);
-        session()->flash('message', $division->name);
-
-        return redirect()->route('division.subjects.edit', $id);
+        
+        return redirect()->route('division.subjects.edit', $id)->withMessage($division->name);
     }
 
     public function studentsEdit($id)
@@ -93,12 +92,16 @@ class DivisionController extends Controller
             'division_id' => null
         ]);
 
-        if ($request->input('user_id')) {
-            foreach ($request->input('user_id') as $userId) {
-                User::where('id', $userId)->update([
-                    'division_id' => $id
-                ]);
-            }
+        // if ($request->input('user_id')) {
+        //     foreach ($request->input('user_id') as $userId) {
+        //         User::where('id', $userId)->update([
+        //             'division_id' => $id
+        //         ]);
+        //     }
+        // }
+
+        if ($userIds = $request->input('user_id')) {
+            User::whereIn('id', $userIds)->update(['division_id' => $id]);
         }
 
         $division = Division::find($id);
@@ -132,7 +135,7 @@ class DivisionController extends Controller
             \Mail::to($student)->queue(new GradeNotification($student, $grade, $subject));
         }
 
-        GradesHistoryController::logCreate($grade, Auth::user()->id);
+
 
         return response()->json([
             'success' => true,
@@ -147,16 +150,12 @@ class DivisionController extends Controller
             'value' => 'required|matching_grade'
         ]);
 
-        if ($grade->value != $request->input('value')) {
-            $grade->update(['value' => $request->input('value')]);
-        }
-
-        GradesHistoryController::logUpdate($grade, Auth::user()->id);
+        $grade->value = $request->input('value');
+        $grade->save();
     }
 
     public function gradeDelete(Grade $grade)
     {
-        GradesHistoryController::logDelete($grade, Auth::user()->id);
         $grade->delete();
     }
 

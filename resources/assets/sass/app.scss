@@ -40,6 +40,13 @@ body {
     }
 }
 
+.navbar-nav .login {
+    &:hover {
+        background: rgb(125, 167, 124);
+    }
+}
+
+
 .dropdown-menu {
     background: rgb(43,48,59);
     top: 100%;

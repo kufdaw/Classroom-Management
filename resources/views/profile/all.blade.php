@@ -25,7 +25,6 @@
 @push('scripts')
 <script>
     $(function() {
-        var action = 'chuj';
         $('#users-table').DataTable({
             processing: true,
             serverSide: true,

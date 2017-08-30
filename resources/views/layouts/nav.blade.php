@@ -7,9 +7,18 @@
         <span class="nav-link nav-welcome">
             Welcome, <strong> {{ Auth::user()->name }} </strong>
         </span>
+        @else
+        <ul class="navbar-nav">
+            <li class="nav-item login">
+                <a class="nav-link" href="{{ route('login') }}">Log In</a>
+            </li>
+        </ul>
         @endif
         <div class="container">
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home') }}">Home</a>
+                </li>
                 @if(Auth::check())
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('profile') }}">Edit Profile</a>

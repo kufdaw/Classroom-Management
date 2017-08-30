@@ -110,7 +110,7 @@ class ProfileController extends Controller
 
         return $datatables->eloquent($user)
                             ->addColumn('action', function ($user) {
-                                return '<a class="btn btn-info btn-sm" href="'. route('profile.edit', $user->id) .'">Edit</a> <a class="btn btn-danger btn-sm" href="'. route('profile.delete', $user->id) .'">Delete</a>';
+                                return '<button class="btn btn-info btn-sm user-edit" data-address="'. route('profile.edit', $user->id) .'">Edit</button> <button class="btn btn-danger btn-sm user-delete" data-address="'. route('profile.delete', $user->id) .'">Delete</button>';
                             })
                             ->make(true);
     }
@@ -122,7 +122,7 @@ class ProfileController extends Controller
 
     public function delete($id)
     {
-        $subject = Subject::find($id);
-        $subject->delete();
+        $user = User::find($id);
+        $user->delete();
     }
 }

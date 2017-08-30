@@ -15,7 +15,7 @@ Route::get('/profile/confirm/{token}', 'ProfileController@setPassword')->name('p
 Route::post('/profile/confirm/{token}', 'ProfileController@confirm')->name('profile.confirm');
 Route::get('/profile/all-data', 'ProfileController@data')->name('profile.data');
 Route::get('/profile/all', 'ProfileController@viewAll')->name('profile.all');
-Route::get('/profile/delete/{id}', 'ProfileController@delete')->name('profile.delete');
+Route::delete('/profile/delete/{id}', 'ProfileController@delete')->name('profile.delete');
 Route::get('/profile/edit/{id}', 'ProfileController@edit')->name('profile.edit');
 
 Route::get('/subject/create', 'SubjectController@create')->name('subject.create');

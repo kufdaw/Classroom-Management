@@ -40,6 +40,10 @@ body {
   background: #7a3c38;
 }
 
+.navbar-nav .login:hover {
+  background: #7da77c;
+}
+
 .dropdown-menu {
   background: #2b303b;
   top: 100%;
