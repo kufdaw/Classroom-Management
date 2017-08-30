@@ -16,7 +16,8 @@ Route::post('/profile/confirm/{token}', 'ProfileController@confirm')->name('prof
 Route::get('/profile/all-data', 'ProfileController@data')->name('profile.data');
 Route::get('/profile/all', 'ProfileController@viewAll')->name('profile.all');
 Route::delete('/profile/delete/{id}', 'ProfileController@delete')->name('profile.delete');
-Route::get('/profile/edit/{id}', 'ProfileController@edit')->name('profile.edit');
+Route::get('/profile/edit/{id}', 'ProfileController@edit')->name('profile.edit-user');
+Route::post('/profile/edit/', 'ProfileController@userUpdate')->name('profile.update-user');
 
 Route::get('/subject/create', 'SubjectController@create')->name('subject.create');
 Route::post('/subject/create', 'SubjectController@store');

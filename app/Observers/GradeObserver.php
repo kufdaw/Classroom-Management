@@ -11,13 +11,6 @@ use App\Repositories\Contracts\GradeContract;
 
 class GradeObserver
 {
-    private $gradeRepository;
-
-    public function __construct(GradeContract $gradeRepository)
-    {
-        $this->gradeRepository = $gradeRepository;
-    }
-
     public function created(Grade $grade)
     {
         GradesHistory::create([

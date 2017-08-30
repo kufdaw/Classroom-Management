@@ -110,7 +110,7 @@ class ProfileController extends Controller
 
         return $datatables->eloquent($user)
                             ->addColumn('action', function ($user) {
-                                return '<button class="btn btn-info btn-sm user-edit" data-address="'. route('profile.edit', $user->id) .'">Edit</button> <button class="btn btn-danger btn-sm user-delete" data-address="'. route('profile.delete', $user->id) .'">Delete</button>';
+                                return '<a class="btn btn-info btn-sm user-edit" href="'. route('profile.edit-user', $user->id) .'">Edit</a> <button class="btn btn-danger btn-sm user-delete" data-address="'. route('profile.delete', $user->id) .'">Delete</button>';
                             })
                             ->make(true);
     }
@@ -124,5 +124,12 @@ class ProfileController extends Controller
     {
         $user = User::find($id);
         $user->delete();
+    }
+
+    public function edit(int $id)
+    {
+        return view('profile.edit-user', [
+            'user' => User::find($id)
+        ]);
     }
 }
