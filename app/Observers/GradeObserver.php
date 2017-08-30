@@ -11,16 +11,34 @@ class GradeObserver
 {
     public function created(Grade $grade)
     {
-        GradesHistoryController::logCreate($grade, Auth::user()->id);
+        $gradeHistory = GradesHistory::create([
+            'subject_id' => $grade->subject_id,
+            'student_id' => $grade->student_id,
+            'value' => $grade->value,
+            'teacher_id' => Auth::user()->id,
+            'operation' => 'create'
+        ]);
     }
 
     public function deleted(Grade $grade)
     {
-        GradesHistoryController::logDelete($grade, Auth::user()->id);
+        $gradeHistory = GradesHistory::create([
+            'subject_id' => $grade->subject_id,
+            'student_id' => $grade->student_id,
+            'value' => $grade->value,
+            'teacher_id' =>  Auth::user()->id,
+            'operation' => 'update'
+        ]);
     }
 
     public function updated(Grade $grade)
     {
-        GradesHistoryController::logUpdate($grade, Auth::user()->id);
+        $gradeHistory = GradesHistory::create([
+            'subject_id' => $grade->subject_id,
+            'student_id' => $grade->student_id,
+            'value' => $grade->value,
+            'teacher_id' => Auth::user()->id,
+            'operation' => 'delete'
+        ]);
     }
 }
