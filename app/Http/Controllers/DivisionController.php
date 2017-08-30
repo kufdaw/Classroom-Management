@@ -8,7 +8,7 @@ use App\User;
 use App\Subject;
 use App\Grade;
 use App\Mail\GradeNotification;
-use App\Http\Controllers\GradesHistoryController;
+use App\Repositories\Contracts\GradeContract;
 use App\Jobs\DownloadDivisionSummary;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\Redis;
 
 class DivisionController extends Controller
 {
+    private $gradeRepository;
+
+    public function __construct(GradeContract $gradeContract)
+    {
+        $this->gradeRepository = $gradeContract;
+    }
+
     public function index()
     {
         return view('division.index.view', [
@@ -74,7 +81,7 @@ class DivisionController extends Controller
 
         $division = Division::find($id);
         $division->subjects()->sync($subjectTeacher);
-        
+
         return redirect()->route('division.subjects.edit', $id)->withMessage($division->name);
     }
 
@@ -123,19 +130,13 @@ class DivisionController extends Controller
             'value' => 'required|matching_grade'
         ]);
 
-        $grade = Grade::create([
-            'value' => $request->input('value'),
-            'subject_id' => $subjectId,
-            'student_id' => $studentId
-        ]);
+        $grade = $this->gradeRepository->add($request->input('value'), $subjectId, $studentId);
 
         $student = User::find($studentId);
         $subject = Subject::find($subjectId);
         if ($student->mail_notification == 1) {
             \Mail::to($student)->queue(new GradeNotification($student, $grade, $subject));
         }
-
-
 
         return response()->json([
             'success' => true,
@@ -150,13 +151,12 @@ class DivisionController extends Controller
             'value' => 'required|matching_grade'
         ]);
 
-        $grade->value = $request->input('value');
-        $grade->save();
+        $this->gradeRepository->update($grade, $request->input('value'));
     }
 
     public function gradeDelete(Grade $grade)
     {
-        $grade->delete();
+        $this->gradeRepository->delete($grade);
     }
 
     public function generateCSV(Request $request, Division $division, Subject $subject)

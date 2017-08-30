@@ -4,14 +4,23 @@ namespace App\Observers;
 
 use App\Grade;
 use App\User;
+use App\GradesHistory;
 use App\Http\Controllers\GradesHistoryController;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\Contracts\GradeContract;
 
 class GradeObserver
 {
+    private $gradeRepository;
+
+    public function __construct(GradeContract $gradeRepository)
+    {
+        $this->gradeRepository = $gradeRepository;
+    }
+
     public function created(Grade $grade)
     {
-        $gradeHistory = GradesHistory::create([
+        GradesHistory::create([
             'subject_id' => $grade->subject_id,
             'student_id' => $grade->student_id,
             'value' => $grade->value,
@@ -22,7 +31,7 @@ class GradeObserver
 
     public function deleted(Grade $grade)
     {
-        $gradeHistory = GradesHistory::create([
+        GradesHistory::create([
             'subject_id' => $grade->subject_id,
             'student_id' => $grade->student_id,
             'value' => $grade->value,
@@ -33,7 +42,7 @@ class GradeObserver
 
     public function updated(Grade $grade)
     {
-        $gradeHistory = GradesHistory::create([
+        GradesHistory::create([
             'subject_id' => $grade->subject_id,
             'student_id' => $grade->student_id,
             'value' => $grade->value,
