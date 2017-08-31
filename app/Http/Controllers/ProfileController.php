@@ -126,10 +126,40 @@ class ProfileController extends Controller
         $user->delete();
     }
 
-    public function edit(int $id)
+    public function userEdit(int $id)
     {
         return view('profile.edit-user', [
-            'user' => User::find($id)
+            'user' => User::find($id),
+            'roles' => Role::all()
         ]);
+    }
+
+    public function userUpdate(Request $request, int $id)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => 'required|email',
+            'password' => 'confirmed'
+        ]);
+
+        $user = User::find($id);
+
+        if (!$request->input('password')) {
+            $user->update([
+            'name' => $request->input('name'),
+            'surname' => $request->input('surname'),
+            'email' => $request->input('email')
+            ]);
+        } else {
+            $user->update([
+            'name' => $request->input('name'),
+            'surname' => $request->input('surname'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password'))
+            ]);
+        }
+
+        return redirect()->route('profile.edit-user', $user->id)->withMessage($user->name . ' ' . $user->surname);
     }
 }

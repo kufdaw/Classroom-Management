@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
 
         Grade::observe("\App\Observers\GradeObserver");
         $this->app->bind(\App\Repositories\Contracts\GradeContract::class, \App\Repositories\Eloquent\GradeRepository::class);
+        $this->app->bind(\App\Repositories\Contracts\GradesHistoryContract::class, \App\Repositories\Eloquent\GradesHistoryRepository::class);
     }
 
     /**

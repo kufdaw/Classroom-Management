@@ -7,40 +7,29 @@ use App\User;
 use App\GradesHistory;
 use App\Http\Controllers\GradesHistoryController;
 use Illuminate\Support\Facades\Auth;
-use App\Repositories\Contracts\GradeContract;
+use App\Repositories\Contracts\GradesHistoryContract;
 
 class GradeObserver
 {
-    public function created(Grade $grade)
+    private $gradesHistoryRepository;
+
+    public function __construct(GradesHistoryContract $gradesHistoryContract)
     {
-        GradesHistory::create([
-            'subject_id' => $grade->subject_id,
-            'student_id' => $grade->student_id,
-            'value' => $grade->value,
-            'teacher_id' => Auth::user()->id,
-            'operation' => 'create'
-        ]);
+        $this->gradesHistoryRepository = $gradesHistoryContract;
     }
 
-    public function deleted(Grade $grade)
+    public function created(Grade $grade)
     {
-        GradesHistory::create([
-            'subject_id' => $grade->subject_id,
-            'student_id' => $grade->student_id,
-            'value' => $grade->value,
-            'teacher_id' =>  Auth::user()->id,
-            'operation' => 'update'
-        ]);
+        $this->gradesHistoryRepository->add($grade);
     }
 
     public function updated(Grade $grade)
     {
-        GradesHistory::create([
-            'subject_id' => $grade->subject_id,
-            'student_id' => $grade->student_id,
-            'value' => $grade->value,
-            'teacher_id' => Auth::user()->id,
-            'operation' => 'delete'
-        ]);
+        $this->gradesHistoryRepository->update($grade);
+    }
+
+    public function deleted(Grade $grade)
+    {
+        $this->gradesHistoryRepository->delete($grade);
     }
 }

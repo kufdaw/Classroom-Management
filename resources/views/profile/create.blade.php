@@ -27,7 +27,7 @@
 
             <div class="form-group">
                 <label for="role">Role:</label>
-                <select class="custom-select" name="role">
+                <select class="form-control" name="role">
                     @foreach($roles as $role)
                     <option value="{{ $role->id }}">
                         {{ $role->name }}
