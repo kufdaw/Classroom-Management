@@ -31,6 +31,9 @@ Route::put('/division/subjects/edit/{id}', 'DivisionController@subjectsUpdate')-
 Route::get('/division/students/edit/{id}', 'DivisionController@studentsEdit')->name('division.students.edit');
 Route::put('/division/students/edit/{id}', 'DivisionController@studentsUpdate')->name('division.students.update');
 
+Route::get('/grades-search', 'GradeController@search')->name('grades-search');
+Route::get('/get-subjects/{division}', 'GradeController@getSubjects')->name('get-subjects');
+
 Route::group(['prefix' => '/division/subjects'], function () {
     Route::get('/grades-edit/{division}/{subject}', 'DivisionController@gradesEdit')->name('division.subject.grades-edit');
     Route::post('/grades-edit/{subjectId}/{studentId}', 'DivisionController@gradeAdd')->name('division.subject.grade-add');

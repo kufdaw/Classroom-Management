@@ -49,6 +49,9 @@
                         <a class="nav-link" href="{{ route('division.index') }}">Divisions</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('grades-search') }}">Grades</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('division.index') }}">Statistics</a>
                     </li>
                     @endif

@@ -8,7 +8,7 @@ body {
 
 .nav-welcome {
   padding-top: 1.3rem;
-  color: #22e5ff;
+  color: #abc8d7;
 }
 
 .nav-link {
@@ -135,5 +135,22 @@ label .focus {
   border-radius: 3px;
   margin: 1em;
   padding: 1em;
+}
+
+.accordion-toggle {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.accordion-toggle:hover {
+  background: #e8f5fc;
+}
+
+.accordion {
+  padding: 0 1rem 0 1rem;
+}
+
+.accordion td {
+  border-top: none;
 }
 

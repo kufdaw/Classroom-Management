@@ -7,26 +7,27 @@
                 {{ csrf_field() }}
 
                 <h1>Current division list:</h1>
-
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="col-md-2">Division</th>
-                                <th class="col-md-6 text-center">Tutor</th>
-                                <th class="col-md-4">Assign</th>
+                                <th class="col-md-4">Division</th>
+                                <th class="col-md-6">Tutor</th>
+                                <th class="col-md-2">Assign</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($divisions as $division)
-                            <tr>
-                                <th class="col-md-2">{{ $division->name }}
+                            <tr class="accordion-toggle">
+                                <th>
+                                    {{ $division->name }}
                                     <button type="button" class="btn btn-danger btn-sm delete-division" data-division="{{ $division->name }}" data-token="{{ csrf_token() }}" data-address="{{ route('division.delete', $division->id) }}">Delete</button>
                                 </th>
-                                <th class="col-md-8 text-center table-tutor">{{ $division->tutor->name . ' ' . $division->tutor->surname }}</th>
-                                <th class="col-md-2">
+
+                                <th class="table-tutor">{{ $division->tutor->name . ' ' . $division->tutor->surname }}</th>
+
+                                <th>
                                   <a class="btn btn-info btn-sm edit-division" href="{{ route('division.subjects.edit', $division->id) }}">Subjects</a>
-                                    <!-- <button role="button" class="btn btn-info btn-sm edit-division">Edit</button> -->
                                   <a class="btn btn-primary btn-sm edit-division" href="{{ route('division.students.edit', $division->id) }}">Students</a>
                                 </th>
                             </tr>

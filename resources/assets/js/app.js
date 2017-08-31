@@ -248,3 +248,15 @@ $('body').on('click', '.user-delete', function(){
          return false;
      }
 });
+
+$('.select-division').click(function() {
+    $('.select-subject').html('');
+    var $address = $(this).data('address');
+    var _this = this;
+    $.getJSON($address, function(data) {
+        $('.select-subject').attr("size", $(data).length);
+        data.forEach(function(index) {
+                $('.select-subject').append('<option>' + index['name'] + '</option>')
+        });
+    });
+});

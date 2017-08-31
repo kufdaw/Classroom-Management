@@ -18,7 +18,7 @@
                     <tbody>
                         @foreach($division->students as $student)
                             <tr>
-                                <td >{{ $student->name . ' ' . $student->surname }}</td>
+                                <td>{{ $student->name . ' ' . $student->surname }}</td>
                                 <td class="grade-list">
                                     @foreach($subject->grades->where('student_id', $student->id) as $grade)
                                         <a class="btn btn-secondary btn-sm edit-grade" data-address-update="{{ route('division.subject.grade-update', $grade->id) }}" data-address-delete="{{ route('division.subject.grade-delete', $grade->id) }}"> {{ $grade->value }} </a>

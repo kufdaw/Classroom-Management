@@ -4,6 +4,8 @@ namespace App\Repositories\Eloquent;
 
 use App\Grade;
 use App\Repositories\Contracts\GradeContract;
+use App\Division;
+use Illuminate\Support\Collection;
 
 class GradeRepository implements GradeContract
 {
@@ -27,5 +29,23 @@ class GradeRepository implements GradeContract
     public function delete(Grade $grade)
     {
         $grade->delete();
+    }
+
+    /**
+     * @param Division $Division
+     * @return Collection|Subject[]
+     */
+    public function getSubjects(Division $division):Collection
+    {
+        return $division->subjects;
+    }
+
+    /**
+     * @param Division $Division
+     * @return Collection|Subject[]
+     */
+    public function getGrades(Division $division):Collection
+    {
+        return $division->subjects;
     }
 }

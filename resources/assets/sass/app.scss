@@ -11,7 +11,7 @@ body {
 
 .nav-welcome {
     padding-top: 1.3rem;
-    color: rgb(34, 229, 255);
+    color: rgb(171, 200, 215);
 }
 
 .nav-link {
@@ -144,4 +144,18 @@ label .focus {
     border-radius: 3px;
     margin: 1em;
     padding: 1em;
+}
+
+.accordion-toggle {
+    transition: 0.3s;
+    &:hover {
+        background: rgb(232, 245, 252);
+    }
+}
+
+.accordion {
+    padding: 0 1rem 0 1rem;
+    td {
+        border-top: none;
+    }
 }

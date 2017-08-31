@@ -3,13 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use App\Division;
+use App\Repositories\Contracts\GradeContract;
 
 class GradeController extends Controller
 {
+    private $gradeRepository;
+
+    public function __construct(GradeContract $gradeContract)
+    {
+        $this->gradeRepository = $gradeContract;
+    }
+
     public function index()
     {
-        return view('grades.index', [
+        return view('grades.student', [
             'student' => Auth::user()
         ]);
     }
@@ -21,6 +31,18 @@ class GradeController extends Controller
         return response()->json([
             'success' => true,
             'if-notify' => $user->mail_notification
+        ]);
+    }
+
+    public function getSubjects(Division $division):Collection
+    {
+        return $this->gradeRepository->getSubjects($division);
+    }
+
+    public function search()
+    {
+        return view('grades.admin', [
+            'divisions' => Division::all()
         ]);
     }
 }
