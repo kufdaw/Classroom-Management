@@ -33,6 +33,7 @@ Route::put('/division/students/edit/{id}', 'DivisionController@studentsUpdate')-
 
 Route::get('/grades-search', 'GradeController@search')->name('grades-search');
 Route::get('/get-subjects/{division}', 'GradeController@getSubjects')->name('get-subjects');
+Route::get('/get-grades/{division}/{subject}', 'GradeController@getGrades')->name('get-grades');
 
 Route::group(['prefix' => '/division/subjects'], function () {
     Route::get('/grades-edit/{division}/{subject}', 'DivisionController@gradesEdit')->name('division.subject.grades-edit');
@@ -46,3 +47,5 @@ Route::get('/history', 'GradesHistoryController@index')->name('history.index');
 
 Route::get('/grades', 'GradeController@index')->name('grades.index');
 Route::put('/grades/{ifNotify}', 'GradeController@toggleNotification')->name('grades.toggleNotification');
+
+Route::get('/stats', 'GradeController@statsIndex')->name('stats.index');

@@ -4,6 +4,7 @@ namespace App\Repositories\Contracts;
 
 use App\Grade;
 use App\Division;
+use App\Subject;
 use Illuminate\Support\Collection;
 
 interface GradeContract
@@ -12,5 +13,5 @@ interface GradeContract
     public function update(Grade $grade, string $value):Grade;
     public function delete(Grade $grade);
     public function getSubjects(Division $division):Collection;
-    //public function getGrades():Collection;
+    public function getGrades(Division $division, Subject $subject):array;
 }

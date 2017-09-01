@@ -250,13 +250,76 @@ $('body').on('click', '.user-delete', function(){
 });
 
 $('.select-division').click(function() {
-    $('.select-subject').html('');
-    var $address = $(this).data('address');
+    $('.option-subject').html('');
+    $('tbody').html('');
+    var $addressDivision = $(this).data('address');
+    var $divisionId = $(this).data('divisionid');
     var _this = this;
-    $.getJSON($address, function(data) {
-        $('.select-subject').attr("size", $(data).length);
+    $.getJSON($addressDivision, function(data) {
+        $('.option-subject').attr("size", $(data).length);
         data.forEach(function(index) {
-                $('.select-subject').append('<option>' + index['name'] + '</option>')
+            var $subjectOption = $('<option>', {
+                "class": 'select-subject',
+                "data-address": '/get-grades/' + $divisionId + '/' + index['id'],
+                "html": index['name']
+            });
+            $('.option-subject').append($subjectOption);
         });
     });
 });
+
+$('body').on('click', '.select-subject', function(){
+    var $addressDivisionSubject = $(this).data('address');
+    $('tbody').html('');
+    $.getJSON($addressDivisionSubject, function(data) {
+        data.forEach(function(index){
+            var $tdName = $('<td>', {
+                "html": index['name']
+            });
+
+            var $gradesObject = $.makeArray(index['grades']);
+            var $grades = $gradesObject.join(', ');
+
+            var $tdGrades = $('<td>', {
+                "html": $grades
+            });
+
+            var $rows = '<tr>' + $tdName.prop('outerHTML') + $tdGrades.prop('outerHTML') + '</tr>';
+
+            $('tbody').append($rows);
+        });
+    });
+});
+
+
+google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Mushrooms', 34],
+          ['Onions', 47],
+          ['Olives', 47],
+          ['Zucchini', 12],
+          ['Pepperoni', 49]
+        ]);
+
+        // Set chart options
+        var options = {'title':'How Much Pizza I Ate Last Night',
+                       'width':400,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }

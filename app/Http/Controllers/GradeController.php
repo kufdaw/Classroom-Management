@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use App\Division;
+use App\Subject;
 use App\Repositories\Contracts\GradeContract;
 
 class GradeController extends Controller
@@ -39,10 +40,20 @@ class GradeController extends Controller
         return $this->gradeRepository->getSubjects($division);
     }
 
+    public function getGrades(Division $division, Subject $subject):array
+    {
+        return $this->gradeRepository->getGrades($division, $subject);
+    }
+
     public function search()
     {
         return view('grades.admin', [
             'divisions' => Division::all()
         ]);
+    }
+
+    public function statsIndex()
+    {
+        return view('stats.index');
     }
 }

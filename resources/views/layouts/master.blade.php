@@ -45,7 +45,12 @@
       <script src="https://cdn.datatables.net/buttons/1.4.0/js/dataTables.buttons.min.js"></script>
       <script src="https://cdn.datatables.net/buttons/1.4.0/js/buttons.bootstrap4.min.js "></script>
 
+      <!-- google charts -->
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+      <!-- custom js  -->
       <script src="/js/app.js"></script>
+      
       @stack('scripts')
 
   </body>
