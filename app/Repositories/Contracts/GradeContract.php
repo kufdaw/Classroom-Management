@@ -13,5 +13,6 @@ interface GradeContract
     public function update(Grade $grade, string $value):Grade;
     public function delete(Grade $grade);
     public function getSubjects(Division $division):Collection;
-    public function getGrades(Division $division, Subject $subject):array;
+    public function getSubjectGrades(Division $division, Subject $subject):array;
+    public function getDivisionGrades(Division $division):array;
 }

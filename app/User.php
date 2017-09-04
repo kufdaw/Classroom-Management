@@ -61,4 +61,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Subject', 'division_subject');
     }
+
+    public function grades()
+    {
+        return $this->hasMany('App\Grade', 'student_id');
+    }
 }

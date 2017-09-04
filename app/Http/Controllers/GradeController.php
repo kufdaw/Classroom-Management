@@ -40,9 +40,14 @@ class GradeController extends Controller
         return $this->gradeRepository->getSubjects($division);
     }
 
-    public function getGrades(Division $division, Subject $subject):array
+    public function getSubjectGrades(Division $division, Subject $subject):array
     {
-        return $this->gradeRepository->getGrades($division, $subject);
+        return $this->gradeRepository->getSubjectGrades($division, $subject);
+    }
+
+    public function getDivisionGrades(Division $division):array
+    {
+        return $this->gradeRepository->getDivisionGrades($division);
     }
 
     public function search()

@@ -45,7 +45,7 @@ class GradeRepository implements GradeContract
      * @param Division $Division, Subject $Subject
      * @return string[]
      */
-    public function getGrades(Division $division, Subject $subject):array
+    public function getSubjectGrades(Division $division, Subject $subject):array
     {
         $grades = [];
         foreach ($division->students as $key => $student) {
@@ -55,5 +55,21 @@ class GradeRepository implements GradeContract
             }
         }
         return $grades;
+    }
+
+    /**
+    * @param Division $Division
+    * @return string[]
+    */
+    public function getDivisionGrades(Division $division):array
+    {
+        for ($i = 1; $i <= 6; $i += 0.5) {
+            $temp = 0;
+            foreach ($division->students as $student) {
+                $temp += $student->grades->where('value', $i)->count();
+            }
+            $gradesAmount[(string)$i][] = $temp;
+        }
+        return $gradesAmount;
     }
 }

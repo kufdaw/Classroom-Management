@@ -10,7 +10,7 @@
         <div class="form-group col-md-4">
             <select class="form-control" size="{{ $divisions->count() }}">
                 @foreach($divisions as $division)
-                    <option class="select-division" data-divisionid="{{ $division->id }}" data-address={{ route('get-subjects', $division->id) }}> {{ $division->name }} </option>
+                    <option class="select-division" data-divisionid="{{ $division->id }}" data-address="{{ route('get-subjects', $division->id) }}" data-getdivgrades="{{ route('get-division-grades', $division->id) }}"> {{ $division->name }} </option>
                 @endforeach
             </select>
         </div>
