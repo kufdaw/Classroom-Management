@@ -41,7 +41,7 @@ body {
 }
 
 .navbar-nav .login:hover {
-  background: #7da77c;
+  background: rgba(27, 98, 22, 0.43);
 }
 
 .dropdown-menu {

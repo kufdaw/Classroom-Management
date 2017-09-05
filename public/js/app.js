@@ -341,14 +341,17 @@ $('.select-division').click(function () {
         });
     });
     $.getJSON($getDivisionGrades, function (data) {
-        google.charts.setOnLoadCallback(function () {
-            console.log(data);
-            var dataArray = $.map(data, function (value, index) {
-                return [value];
+        console.log(data);
+        if (!$.isEmptyObject(data)) {
+            google.charts.setOnLoadCallback(function () {
+                var dataArray = $.map(data, function (value, index) {
+                    return [value];
+                });
+                drawChart(dataArray);
             });
-            console.log(dataArray);
-            drawChart(dataArray);
-        });
+        } else {
+            $('#chart_div').html('');
+        }
     });
 });
 
@@ -385,7 +388,7 @@ $('body').on('click', '.select-subject', function () {
             }
         }
         if (!$.isEmptyObject($countGrades)) {
-            console.log($countGrades);
+            // console.log($countGrades);
             google.charts.setOnLoadCallback(function () {
                 drawChart($countGrades);
             });
@@ -395,11 +398,26 @@ $('body').on('click', '.select-subject', function () {
     });
 });
 
+$('#teacher-stats').click(function () {
+    console.log('bud');
+    var $teacherGradesUrl = $(this).data('grades');
+    $.getJSON($teacherGradesUrl, function (data) {
+        if (!$.isEmptyObject(data)) {
+            var dataArray = $.map(data, function (value, index) {
+                return [value];
+            });
+            google.charts.setOnLoadCallback(function () {
+                drawChart(dataArray);
+            });0;
+        }
+    });
+});
+
 function drawChart($rowsData) {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Topping');
     data.addColumn('number', 'Slices');
-    console.log($rowsData);
+    // console.log($rowsData);
     data.addRows($rowsData);
     var options = { 'title': 'Grades chart',
         'width': 600,
@@ -407,23 +425,6 @@ function drawChart($rowsData) {
     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
     chart.draw(data, options);
 }
-
-// for(i = 1; i <= 6; i += 0.5) {
-//     var $gradeOccur = 0;
-//     $gradeOccur = $.grep($gradesObject, function (elem) {
-//         return elem === i;
-//     }).length;
-//     if($gradeOccur > 0) {
-//         $countGrades.push([i.toString(), $gradeOccur]);
-//     }
-// }
-
-// console.log($countGrades);
-
-// google.charts.load('current', {'packages':['corechart']});
-// google.charts.setOnLoadCallback(function () {
-//     drawChart($countGrades);
-// });
 
 /***/ }),
 /* 2 */

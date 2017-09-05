@@ -15,9 +15,9 @@ class CreateGradesHistoriesTable extends Migration
     {
         Schema::create('grades_histories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('subject_id');
-            $table->integer('student_id');
-            $table->integer('teacher_id');
+            $table->unsignedInteger('subject_id');
+            $table->unsignedInteger('student_id');
+            $table->unsignedInteger('teacher_id');
             $table->integer('value');
             $table->string('operation');
             $table->timestamps();

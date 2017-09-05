@@ -56,10 +56,15 @@
                 @endif
                 @include ('layouts.errors')
             </form>
-
-
-
         </div>
+            @if($user->hasRole('teacher'))
+                <div class="col-md-12">
+                    <hr>
+                    <button class="btn btn-warning" id="teacher-stats" data-grades="{{ route('get-teacher-grades', $user->id) }}" type="submit" >Show grades stats!</button>
+                    <div id="chart_div"></div>
+                    <hr>
+                </div>
+            @endif
     </div>
 </div>
 

@@ -5,17 +5,19 @@ namespace App\Repositories\Eloquent;
 use App\Grade;
 use App\Division;
 use App\Subject;
+use App\User;
 use App\Repositories\Contracts\GradeContract;
 use Illuminate\Support\Collection;
 
 class GradeRepository implements GradeContract
 {
-    public function add(string $value, int $subjectId, int $studentId):Grade
+    public function add(string $value, int $subjectId, int $studentId, int $teacherId):Grade
     {
         $grade = Grade::create([
             'value' => $value,
             'subject_id' => $subjectId,
-            'student_id' => $studentId
+            'student_id' => $studentId,
+            'teacher_id' => $teacherId
         ]);
 
         return $grade;
@@ -63,12 +65,33 @@ class GradeRepository implements GradeContract
     */
     public function getDivisionGrades(Division $division):array
     {
+        $gradesAmount = [];
         for ($i = 1; $i <= 6; $i += 0.5) {
             $temp = 0;
             foreach ($division->students as $student) {
                 $temp += $student->grades->where('value', $i)->count();
             }
-            $gradesAmount[(string)$i][] = $temp;
+            if ($temp > 0) {
+                $gradesAmount[(string)$i] = [(string)$i, $temp];
+            }
+        }
+        return $gradesAmount;
+    }
+
+    /**
+    * @param User $Teacher
+    * @return string[]
+    */
+    public function getTeacherGrades(User $teacher):array
+    {
+        $gradesAmount = [];
+        $grade = Grade::where('teacher_id', $teacher->id)->get();
+        for ($i = 1; $i <= 6; $i += 0.5) {
+            $temp = 0;
+            $temp = $grade->where('value', $i)->count();
+            if ($temp > 0) {
+                $gradesAmount[(string)$i] = [(string)$i, $temp];
+            }
         }
         return $gradesAmount;
     }

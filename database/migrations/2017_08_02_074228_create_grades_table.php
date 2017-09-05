@@ -18,6 +18,7 @@ class CreateGradesTable extends Migration
             $table->double('value');
             $table->unsignedInteger('subject_id');
             $table->unsignedInteger('student_id');
+            $table->unsignedInteger('teacher_id');
             $table->timestamps();
         });
     }

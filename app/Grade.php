@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Grade extends Model
 {
     protected $fillable = [
-        'value', 'subject_id', 'student_id'
+        'value', 'subject_id', 'student_id', 'teacher_id'
     ];
 
     public function subject()
@@ -15,8 +15,18 @@ class Grade extends Model
         return $this->belongsTo('App\Subject');
     }
 
-    public function student()
+    public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function student()
+    {
+        return $this->user()->where('role_id', 3);
+    }
+
+    public function teacher()
+    {
+        return $this->user()->where('role_id', 2);
     }
 }

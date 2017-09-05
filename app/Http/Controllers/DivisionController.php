@@ -130,7 +130,9 @@ class DivisionController extends Controller
             'value' => 'required|matching_grade'
         ]);
 
-        $grade = $this->gradeRepository->add($request->input('value'), $subjectId, $studentId);
+        $teacherId = Auth::user()->id;
+
+        $grade = $this->gradeRepository->add($request->input('value'), $subjectId, $studentId, $teacherId);
 
         $student = User::find($studentId);
         $subject = Subject::find($subjectId);

@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use App\Division;
 use App\Subject;
+use App\User;
 use App\Repositories\Contracts\GradeContract;
 
 class GradeController extends Controller
@@ -48,6 +49,11 @@ class GradeController extends Controller
     public function getDivisionGrades(Division $division):array
     {
         return $this->gradeRepository->getDivisionGrades($division);
+    }
+
+    public function getTeacherGrades(User $teacher):array
+    {
+        return $this->gradeRepository->getTeacherGrades($teacher);
     }
 
     public function search()

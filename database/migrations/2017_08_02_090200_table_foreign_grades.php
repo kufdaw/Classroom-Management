@@ -16,6 +16,7 @@ class TableForeignGrades extends Migration
         Schema::table('grades', function (Blueprint $table) {
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -29,6 +30,7 @@ class TableForeignGrades extends Migration
         Schema::table('grades', function (Blueprint $table) {
             $table->dropForeign(['subject_id']);
             $table->dropForeign(['student_id']);
+            $table->dropForeign(['teacher_id']);
         });
     }
 }

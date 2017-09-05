@@ -35,7 +35,7 @@ class User extends Authenticatable
 
     public function hasRole($role)
     {
-        if (Auth::user()->role->name === $role) {
+        if ($this->role->name === $role) {
             return true;
         } else {
             return false;

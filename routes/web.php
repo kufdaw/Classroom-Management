@@ -35,6 +35,7 @@ Route::get('/grades-search', 'GradeController@search')->name('grades-search');
 Route::get('/get-subjects/{division}', 'GradeController@getSubjects')->name('get-subjects');
 Route::get('/get-subject-grades/{division}/{subject}', 'GradeController@getSubjectGrades')->name('get-subject-grades');
 Route::get('/get-division-grades/count/{division}', 'GradeController@getDivisionGrades')->name('get-division-grades');
+Route::get('/get-teacher-grades/{teacher}', 'GradeController@getTeacherGrades')->name('get-teacher-grades');
 
 Route::group(['prefix' => '/division/subjects'], function () {
     Route::get('/grades-edit/{division}/{subject}', 'DivisionController@gradesEdit')->name('division.subject.grades-edit');
